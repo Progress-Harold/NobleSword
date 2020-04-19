@@ -8,15 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		A22DE69C243AD83B00F48522 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE69B243AD83B00F48522 /* AppDelegate.swift */; };
-		A22DE69E243AD83B00F48522 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE69D243AD83B00F48522 /* GameScene.sks */; };
 		A22DE6A0243AD83B00F48522 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE69F243AD83B00F48522 /* Actions.sks */; };
-		A22DE6A2243AD83B00F48522 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6A1243AD83B00F48522 /* GameScene.swift */; };
+		A22DE6A2243AD83B00F48522 /* GameSceneTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6A1243AD83B00F48522 /* GameSceneTemplate.swift */; };
 		A22DE6A4243AD83B00F48522 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6A3243AD83B00F48522 /* GameViewController.swift */; };
 		A22DE6A7243AD83B00F48522 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6A5243AD83B00F48522 /* Main.storyboard */; };
 		A22DE6A9243AD83D00F48522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6A8243AD83D00F48522 /* Assets.xcassets */; };
 		A22DE6AC243AD83D00F48522 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6AA243AD83D00F48522 /* LaunchScreen.storyboard */; };
 		A22DE6B7243AD83D00F48522 /* NobleSword_BeastsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6B6243AD83D00F48522 /* NobleSword_BeastsTests.swift */; };
 		A22DE6C2243AD83D00F48522 /* NobleSword_BeastsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6C1243AD83D00F48522 /* NobleSword_BeastsUITests.swift */; };
+		A22DE6D1243B011900F48522 /* TitleScreenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6D0243B011900F48522 /* TitleScreenScene.swift */; };
+		A22DE6D4243B044B00F48522 /* Intro.mov in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D2243B044900F48522 /* Intro.mov */; };
+		A22DE6D5243B044B00F48522 /* Prelude.mov in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D3243B044A00F48522 /* Prelude.mov */; };
+		A22DE6DE243B067E00F48522 /* Title.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D7243B067D00F48522 /* Title.sks */; };
+		A22DE6DF243B067E00F48522 /* Red.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D8243B067D00F48522 /* Red.sks */; };
+		A22DE6E0243B067E00F48522 /* Green.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D9243B067D00F48522 /* Green.sks */; };
+		A22DE6E1243B067E00F48522 /* GreenSpirite.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DA243B067D00F48522 /* GreenSpirite.sks */; };
+		A22DE6E2243B067E00F48522 /* Blue.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DB243B067D00F48522 /* Blue.sks */; };
+		A22DE6E3243B067E00F48522 /* LifeGauge.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DC243B067E00F48522 /* LifeGauge.sks */; };
+		A22DE6E4243B067E00F48522 /* magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DD243B067E00F48522 /* magic.sks */; };
+		A2B75D1C243C41700098870E /* TitleScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D1B243C41700098870E /* TitleScreen.sks */; };
+		A2B75D1E243C45FB0098870E /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1D243C45FB0098870E /* Hero.swift */; };
+		A2B75D20243C46330098870E /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1F243C46330098870E /* Tools.swift */; };
+		A2B75D22243C470F0098870E /* AnimationsReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D21243C470F0098870E /* AnimationsReference.swift */; };
+		A2B75D24243C48E20098870E /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D23243C48E20098870E /* Joystick.swift */; };
+		A2B75D26243C4C3A0098870E /* SpiritForest.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D25243C4C3A0098870E /* SpiritForest.sks */; };
+		A2B75D29243C526E0098870E /* jSubstrate.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D27243C526E0098870E /* jSubstrate.png */; };
+		A2B75D2A243C526E0098870E /* jStick.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D28243C526E0098870E /* jStick.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +56,8 @@
 /* Begin PBXFileReference section */
 		A22DE698243AD83B00F48522 /* NobleSword-Beasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NobleSword-Beasts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22DE69B243AD83B00F48522 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A22DE69D243AD83B00F48522 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		A22DE69F243AD83B00F48522 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		A22DE6A1243AD83B00F48522 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		A22DE6A1243AD83B00F48522 /* GameSceneTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneTemplate.swift; sourceTree = "<group>"; };
 		A22DE6A3243AD83B00F48522 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		A22DE6A6243AD83B00F48522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A22DE6A8243AD83D00F48522 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +69,24 @@
 		A22DE6BD243AD83D00F48522 /* NobleSword-BeastsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NobleSword-BeastsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22DE6C1243AD83D00F48522 /* NobleSword_BeastsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobleSword_BeastsUITests.swift; sourceTree = "<group>"; };
 		A22DE6C3243AD83D00F48522 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A22DE6D0243B011900F48522 /* TitleScreenScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleScreenScene.swift; sourceTree = "<group>"; };
+		A22DE6D2243B044900F48522 /* Intro.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Intro.mov; sourceTree = "<group>"; };
+		A22DE6D3243B044A00F48522 /* Prelude.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Prelude.mov; sourceTree = "<group>"; };
+		A22DE6D7243B067D00F48522 /* Title.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Title.sks; sourceTree = "<group>"; };
+		A22DE6D8243B067D00F48522 /* Red.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Red.sks; sourceTree = "<group>"; };
+		A22DE6D9243B067D00F48522 /* Green.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Green.sks; sourceTree = "<group>"; };
+		A22DE6DA243B067D00F48522 /* GreenSpirite.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GreenSpirite.sks; sourceTree = "<group>"; };
+		A22DE6DB243B067D00F48522 /* Blue.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Blue.sks; sourceTree = "<group>"; };
+		A22DE6DC243B067E00F48522 /* LifeGauge.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LifeGauge.sks; sourceTree = "<group>"; };
+		A22DE6DD243B067E00F48522 /* magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic.sks; sourceTree = "<group>"; };
+		A2B75D1B243C41700098870E /* TitleScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleScreen.sks; sourceTree = "<group>"; };
+		A2B75D1D243C45FB0098870E /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		A2B75D1F243C46330098870E /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		A2B75D21243C470F0098870E /* AnimationsReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsReference.swift; sourceTree = "<group>"; };
+		A2B75D23243C48E20098870E /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
+		A2B75D25243C4C3A0098870E /* SpiritForest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SpiritForest.sks; sourceTree = "<group>"; };
+		A2B75D27243C526E0098870E /* jSubstrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jSubstrate.png; sourceTree = "<group>"; };
+		A2B75D28243C526E0098870E /* jStick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jStick.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,15 +137,16 @@
 		A22DE69A243AD83B00F48522 /* NobleSword-Beasts */ = {
 			isa = PBXGroup;
 			children = (
-				A22DE69B243AD83B00F48522 /* AppDelegate.swift */,
-				A22DE69D243AD83B00F48522 /* GameScene.sks */,
-				A22DE69F243AD83B00F48522 /* Actions.sks */,
-				A22DE6A1243AD83B00F48522 /* GameScene.swift */,
-				A22DE6A3243AD83B00F48522 /* GameViewController.swift */,
-				A22DE6A5243AD83B00F48522 /* Main.storyboard */,
-				A22DE6A8243AD83D00F48522 /* Assets.xcassets */,
-				A22DE6AA243AD83D00F48522 /* LaunchScreen.storyboard */,
 				A22DE6AD243AD83D00F48522 /* Info.plist */,
+				A22DE69B243AD83B00F48522 /* AppDelegate.swift */,
+				A29BCBC9244C3A9800A7B000 /* Scenes */,
+				A29BCBCC244C3AE800A7B000 /* SceneControllers */,
+				A29BCBC7244C39E900A7B000 /* Particles */,
+				A29BCBC6244C39B400A7B000 /* Movies */,
+				A29BCBC5244C399F00A7B000 /* Utilities */,
+				A29BCBC8244C3A0100A7B000 /* Objects */,
+				A29BCBCA244C3AA500A7B000 /* Animations */,
+				A29BCBCB244C3AB200A7B000 /* StringLibraries */,
 			);
 			path = "NobleSword-Beasts";
 			sourceTree = "<group>";
@@ -132,6 +167,86 @@
 				A22DE6C3243AD83D00F48522 /* Info.plist */,
 			);
 			path = "NobleSword-BeastsUITests";
+			sourceTree = "<group>";
+		};
+		A29BCBC5244C399F00A7B000 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE6A3243AD83B00F48522 /* GameViewController.swift */,
+				A22DE6A5243AD83B00F48522 /* Main.storyboard */,
+				A22DE6A8243AD83D00F48522 /* Assets.xcassets */,
+				A2B75D28243C526E0098870E /* jStick.png */,
+				A2B75D27243C526E0098870E /* jSubstrate.png */,
+				A22DE6AA243AD83D00F48522 /* LaunchScreen.storyboard */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A29BCBC6244C39B400A7B000 /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE6D2243B044900F48522 /* Intro.mov */,
+				A22DE6D3243B044A00F48522 /* Prelude.mov */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		A29BCBC7244C39E900A7B000 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE6DB243B067D00F48522 /* Blue.sks */,
+				A22DE6D9243B067D00F48522 /* Green.sks */,
+				A22DE6DA243B067D00F48522 /* GreenSpirite.sks */,
+				A22DE6DC243B067E00F48522 /* LifeGauge.sks */,
+				A22DE6DD243B067E00F48522 /* magic.sks */,
+				A22DE6D8243B067D00F48522 /* Red.sks */,
+				A22DE6D7243B067D00F48522 /* Title.sks */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
+		A29BCBC8244C3A0100A7B000 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				A2B75D1D243C45FB0098870E /* Hero.swift */,
+				A2B75D1F243C46330098870E /* Tools.swift */,
+				A2B75D23243C48E20098870E /* Joystick.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		A29BCBC9244C3A9800A7B000 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A2B75D1B243C41700098870E /* TitleScreen.sks */,
+				A2B75D25243C4C3A0098870E /* SpiritForest.sks */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		A29BCBCA244C3AA500A7B000 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE69F243AD83B00F48522 /* Actions.sks */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
+		A29BCBCB244C3AB200A7B000 /* StringLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				A2B75D21243C470F0098870E /* AnimationsReference.swift */,
+			);
+			path = StringLibraries;
+			sourceTree = "<group>";
+		};
+		A29BCBCC244C3AE800A7B000 /* SceneControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A22DE6D0243B011900F48522 /* TitleScreenScene.swift */,
+				A22DE6A1243AD83B00F48522 /* GameSceneTemplate.swift */,
+			);
+			path = SceneControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,11 +353,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A22DE6E3243B067E00F48522 /* LifeGauge.sks in Resources */,
+				A2B75D1C243C41700098870E /* TitleScreen.sks in Resources */,
+				A2B75D26243C4C3A0098870E /* SpiritForest.sks in Resources */,
+				A22DE6D5243B044B00F48522 /* Prelude.mov in Resources */,
 				A22DE6A7243AD83B00F48522 /* Main.storyboard in Resources */,
-				A22DE69E243AD83B00F48522 /* GameScene.sks in Resources */,
+				A22DE6DE243B067E00F48522 /* Title.sks in Resources */,
+				A22DE6E2243B067E00F48522 /* Blue.sks in Resources */,
+				A2B75D2A243C526E0098870E /* jStick.png in Resources */,
+				A22DE6E0243B067E00F48522 /* Green.sks in Resources */,
+				A2B75D29243C526E0098870E /* jSubstrate.png in Resources */,
+				A22DE6E4243B067E00F48522 /* magic.sks in Resources */,
+				A22DE6D4243B044B00F48522 /* Intro.mov in Resources */,
 				A22DE6A9243AD83D00F48522 /* Assets.xcassets in Resources */,
+				A22DE6DF243B067E00F48522 /* Red.sks in Resources */,
 				A22DE6AC243AD83D00F48522 /* LaunchScreen.storyboard in Resources */,
 				A22DE6A0243AD83B00F48522 /* Actions.sks in Resources */,
+				A22DE6E1243B067E00F48522 /* GreenSpirite.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +394,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A22DE6A2243AD83B00F48522 /* GameScene.swift in Sources */,
+				A2B75D22243C470F0098870E /* AnimationsReference.swift in Sources */,
+				A2B75D24243C48E20098870E /* Joystick.swift in Sources */,
+				A2B75D1E243C45FB0098870E /* Hero.swift in Sources */,
+				A22DE6A2243AD83B00F48522 /* GameSceneTemplate.swift in Sources */,
+				A22DE6D1243B011900F48522 /* TitleScreenScene.swift in Sources */,
+				A2B75D20243C46330098870E /* Tools.swift in Sources */,
 				A22DE6A4243AD83B00F48522 /* GameViewController.swift in Sources */,
 				A22DE69C243AD83B00F48522 /* AppDelegate.swift in Sources */,
 			);
@@ -443,7 +575,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AJZ8YNH2N6;
 				INFOPLIST_FILE = "NobleSword-Beasts/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,7 +594,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AJZ8YNH2N6;
 				INFOPLIST_FILE = "NobleSword-Beasts/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
