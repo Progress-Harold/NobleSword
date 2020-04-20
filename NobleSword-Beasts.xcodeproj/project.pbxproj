@@ -26,6 +26,7 @@
 		A22DE6E2243B067E00F48522 /* Blue.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DB243B067D00F48522 /* Blue.sks */; };
 		A22DE6E3243B067E00F48522 /* LifeGauge.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DC243B067E00F48522 /* LifeGauge.sks */; };
 		A22DE6E4243B067E00F48522 /* magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DD243B067E00F48522 /* magic.sks */; };
+		A2573E72244D1B6B00801A72 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2573E71244D1B6B00801A72 /* Section.swift */; };
 		A2B75D1C243C41700098870E /* TitleScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D1B243C41700098870E /* TitleScreen.sks */; };
 		A2B75D1E243C45FB0098870E /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1D243C45FB0098870E /* Hero.swift */; };
 		A2B75D20243C46330098870E /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1F243C46330098870E /* Tools.swift */; };
@@ -79,6 +80,7 @@
 		A22DE6DB243B067D00F48522 /* Blue.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Blue.sks; sourceTree = "<group>"; };
 		A22DE6DC243B067E00F48522 /* LifeGauge.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LifeGauge.sks; sourceTree = "<group>"; };
 		A22DE6DD243B067E00F48522 /* magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic.sks; sourceTree = "<group>"; };
+		A2573E71244D1B6B00801A72 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		A2B75D1B243C41700098870E /* TitleScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleScreen.sks; sourceTree = "<group>"; };
 		A2B75D1D243C45FB0098870E /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		A2B75D1F243C46330098870E /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				A2B75D1D243C45FB0098870E /* Hero.swift */,
 				A2B75D1F243C46330098870E /* Tools.swift */,
 				A2B75D23243C48E20098870E /* Joystick.swift */,
+				A2573E71244D1B6B00801A72 /* Section.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2573E72244D1B6B00801A72 /* Section.swift in Sources */,
 				A2B75D22243C470F0098870E /* AnimationsReference.swift in Sources */,
 				A2B75D24243C48E20098870E /* Joystick.swift in Sources */,
 				A2B75D1E243C45FB0098870E /* Hero.swift in Sources */,

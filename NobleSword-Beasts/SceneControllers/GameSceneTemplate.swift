@@ -9,6 +9,7 @@
 import SpriteKit
 
 class GameSceneTemplate: SKScene {
+    // MARK: Enums
     enum State {
         case cinematic,storyTelling,active,pause
     }
@@ -19,16 +20,23 @@ class GameSceneTemplate: SKScene {
     // MARK: - SceneConponents
     var currentState: State = .active
     var sections = [Int]()
-    /// Section : Spon point
-    var sponPoints = [Int:[CGPoint]]()
+    /// A Space is an area in a section
+    var currentSpace: Space = .two
+    
+    var sectionOneAreas = [Space:SKSpriteNode]()
+    var sectionTwoAreas = [Space:SKSpriteNode]()
+    var sectionThreeAreas = [Space:SKSpriteNode]()
+    var sectionOne: Section?
+    
     let moveJoystick = js(withDiameter: 100)
     
     var hero: Hero = Hero()
     
     // Tests
-    let s = SKSpriteNode(color: .blue, size: CGSize(width: 160, height: 160))
+    let s: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R"), size: CGSize(width: 320, height: 320))
     var walkingStarted = false
     var lastDirection = ""
+    var checkingPosition: Bool = false
     
     var joystickStickImageEnabled = true {
         didSet {
@@ -43,20 +51,93 @@ class GameSceneTemplate: SKScene {
             moveJoystick.baseImage = image
         }
     }
+    
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        
+        sectionOne = Section(camPosition: CameraPosition(one: CGPoint(x: -375, y: 0), two: CGPoint(x: 0, y: 0), three: CGPoint(x: 375, y: 0)), warps: [], sponPoints: [])
+
+        // SetupSpaces
+        if let section1 = childNode(withName: "section1") {
+            if let node = section1.childNode(withName: "space1") as? SKSpriteNode {
+                sectionOne?.spaces[.one] = node
+            }
+            if let node = section1.childNode(withName: "space2") as? SKSpriteNode {
+                sectionOne?.spaces[.two] = node
+            }
+            if let node = section1.childNode(withName: "space3") as? SKSpriteNode {
+                sectionOne?.spaces[.three] = node
+            }
+        }
 
         setupPlayer()
+        handleMovment(with: view)
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
+ 
+        if let sectionOne = sectionOne {
+            for (space, node) in sectionOne.spaces {
+                if node.calculateAccumulatedFrame().contains(s.position) {
+                    self.currentSpace = space
+                    self.setCameraPos()
+                }
+            }            
+        }
+    }
+    
+    func chooseAxis(posx: CGFloat, posy: CGFloat) -> Axies {
+        if (abs(posx) > abs(posy)) {
+            return .x
+        }
+        else {
+            return .y
+        }
+    }
+    
+    func setCameraPos() {
+        camera?.run(.moveTo(x: sectionOne?.camPosition?.getPos(space: currentSpace).x ?? 0, duration: 0.8))
+    }
+    
+    // MARK: Player setup
+    
+    func setupPlayer() {
+            hero.configureAttributes()
+            
+        hero.player.zPosition = 10
+        if let camera = self.childNode(withName: "camera") as? SKCameraNode {
+            self.camera = camera
+            setCameraPos()
+            
+            self.s.zPosition = 10
+            self.addChild(self.s)
+//            self.addChild(hero.player)
+        }
         
+    }
+    
+    func touchDown(atPoint pos : CGPoint) {
+       
+    }
+    
+    func touchMoved(toPoint pos : CGPoint) {
+        
+    }
+    
+    func touchUp(atPoint pos : CGPoint) {
+        
+    }
+    
+    func handleMovment(with view: SKView) {
         let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 7, y: 13, width: 750, height: 1340))
+        
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
         moveJoystickHiddenArea.zPosition = 10
-        self.camera?.addChild(moveJoystickHiddenArea)
         moveJoystickHiddenArea.position = CGPoint(x: -320, y: -700)
-
-//        let rotateJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: frame.midY, y: 0, width: frame.midY, height: frame.width))
-//        self.camera?.addChild(rotateJoystickHiddenArea)
+        
+        camera?.addChild(moveJoystickHiddenArea)
         
         //MARK: Handlers begin
         moveJoystick.on(.begin) { [unowned self] _ in
@@ -79,24 +160,28 @@ class GameSceneTemplate: SKScene {
                     self.s.position = CGPoint(x: self.s.position.x + 2, y: self.s.position.y)
                     if !self.walkingStarted {
                         self.walkingStarted = true
+                        
+                        DispatchQueue.main.async {
+                            self.s.run(protectedAction(with: "walkR"))
+                        }
                     }
-//                    self.hero.player.position = CGPoint(x: self.hero.player.position.x + 2, y: self.hero.player.position.y)
+                    //                    self.hero.player.position = CGPoint(x: self.hero.player.position.x + 2, y: self.hero.player.position.y)
                 }
                 else if (joystick.velocity.x <= -1.0) {
                     print("left")
                     if self.lastDirection != "l" {
                         self.walkingStarted = false
                         self.s.removeAllActions()
-
+                        
                     }
                     
                     self.lastDirection = "l"
                     self.s.position = CGPoint(x: self.s.position.x - 2, y: self.s.position.y)
                     if !self.walkingStarted {
                         self.walkingStarted = true
-
+                        
                         DispatchQueue.main.async {
-                            self.s.run(self.protectedAction(with: "walkL"))
+                            self.s.run(protectedAction(with: "walkL"))
                         }
                     }
                 }
@@ -106,23 +191,36 @@ class GameSceneTemplate: SKScene {
                     if self.lastDirection != "u" {
                         self.walkingStarted = false
                         self.s.removeAllActions()
-
+                        
                     }
                     
                     self.lastDirection = "u"
                     self.s.position = CGPoint(x: self.s.position.x, y: self.s.position.y + 2)
-                    
+                    if !self.walkingStarted {
+                        self.walkingStarted = true
+                        
+                        DispatchQueue.main.async {
+                            self.s.run(protectedAction(with: "walkU"))
+                        }
+                    }
                 }
                 else if (joystick.velocity.y <= -1.0) {
                     print("down")
                     if self.lastDirection != "d" {
                         self.s.removeAllActions()
-
+                        
                         self.walkingStarted = false
                     }
                     
                     self.lastDirection = "d"
                     self.s.position = CGPoint(x: self.s.position.x, y: self.s.position.y - 2)
+                    if !self.walkingStarted {
+                        self.walkingStarted = true
+                        
+                        DispatchQueue.main.async {
+                            self.s.run(protectedAction(with: "walkD"))
+                        }
+                    }
                 }
             }
         }
@@ -136,55 +234,6 @@ class GameSceneTemplate: SKScene {
         joystickStickImageEnabled = true
         joystickSubstrateImageEnabled = true
         view.isMultipleTouchEnabled = true
-    }
-    
-    func chooseAxis(posx: CGFloat, posy: CGFloat) -> Axies {
-        if (abs(posx) > abs(posy)) {
-            return .x
-        }
-        else {
-            return .y
-        }
-    }
-    
-    // MARK: Player setup
-    
-    func setupPlayer() {
-            hero.configureAttributes()
-            
-        hero.player.zPosition = 10
-        if let camera = self.childNode(withName: "camera") as? SKCameraNode {
-            self.camera = camera
-            
-            self.s.zPosition = 10
-            self.camera?.addChild(self.s)
-//            self.addChild(hero.player)
-        }
-        
-    }
-    
-    func touchDown(atPoint pos : CGPoint) {
-       
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
-    
-    public func protectedAction(with name: String) -> SKAction {
-        guard let action: SKAction = SKAction(named: name) else {
-            return SKAction()
-        }
-        
-        return action
     }
 }
 
