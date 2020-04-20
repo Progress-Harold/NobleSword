@@ -27,6 +27,7 @@
 		A22DE6E3243B067E00F48522 /* LifeGauge.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DC243B067E00F48522 /* LifeGauge.sks */; };
 		A22DE6E4243B067E00F48522 /* magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DD243B067E00F48522 /* magic.sks */; };
 		A2573E72244D1B6B00801A72 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2573E71244D1B6B00801A72 /* Section.swift */; };
+		A2573E74244D4F3B00801A72 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2573E73244D4F3B00801A72 /* Level.swift */; };
 		A2B75D1C243C41700098870E /* TitleScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D1B243C41700098870E /* TitleScreen.sks */; };
 		A2B75D1E243C45FB0098870E /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1D243C45FB0098870E /* Hero.swift */; };
 		A2B75D20243C46330098870E /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1F243C46330098870E /* Tools.swift */; };
@@ -81,6 +82,7 @@
 		A22DE6DC243B067E00F48522 /* LifeGauge.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LifeGauge.sks; sourceTree = "<group>"; };
 		A22DE6DD243B067E00F48522 /* magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic.sks; sourceTree = "<group>"; };
 		A2573E71244D1B6B00801A72 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		A2573E73244D4F3B00801A72 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		A2B75D1B243C41700098870E /* TitleScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleScreen.sks; sourceTree = "<group>"; };
 		A2B75D1D243C45FB0098870E /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		A2B75D1F243C46330098870E /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				A2B75D1F243C46330098870E /* Tools.swift */,
 				A2B75D23243C48E20098870E /* Joystick.swift */,
 				A2573E71244D1B6B00801A72 /* Section.swift */,
+				A2573E73244D4F3B00801A72 /* Level.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				A22DE6D1243B011900F48522 /* TitleScreenScene.swift in Sources */,
 				A2B75D20243C46330098870E /* Tools.swift in Sources */,
 				A22DE6A4243AD83B00F48522 /* GameViewController.swift in Sources */,
+				A2573E74244D4F3B00801A72 /* Level.swift in Sources */,
 				A22DE69C243AD83B00F48522 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
