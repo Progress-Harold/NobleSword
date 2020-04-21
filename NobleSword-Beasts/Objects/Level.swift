@@ -11,20 +11,21 @@ import SpriteKit
 
 struct Level {
     private var sections: [Section] = [Section]()
-    private var sectionDict: [Int: Section] = [Int: Section]()
+    var sectionDict: [Int: Section] = [Int: Section]()
     private var counter: Int = 0
-    private var currentSectionNumber: Int = 0
+    var currentSectionNumber: Int = 1
     
     mutating func add(section: Section) {
         counter += 1
         sections.append(section)
-        sectionDict[counter - 1] = section
+        sectionDict[counter] = section
     }
     
-    func getPreviousSection() -> Section? {
-        let index = currentSectionNumber - 2
+    mutating func previousSection() -> Section? {
+        let index = currentSectionNumber - 1
         
-        if (index) >= 0 {
+        if (index) >= 1 {
+            currentSectionNumber -= 1
             return sectionDict[index]
         }
         
@@ -32,10 +33,16 @@ struct Level {
         return nil
     }
     
-    func getNextSection() -> Section? {
-        let index = currentSectionNumber + 2
+    func currentSection() -> Section? {
+        return sectionDict[currentSectionNumber]
+    }
+    
+    
+    mutating func nextSection() -> Section? {
+        let index = currentSectionNumber + 1
         
         if (index <= sections.count) {
+            currentSectionNumber += 1
             return sectionDict[index]
         }
         

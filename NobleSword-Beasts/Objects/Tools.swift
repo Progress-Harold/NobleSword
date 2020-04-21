@@ -15,7 +15,14 @@ enum MoveState {
     case n,s,w,e
 }
 
-public func protectedAction(with name: String) -> SKAction {
+public func protectedAction(with name: String, duration: TimeInterval? = nil) -> SKAction {
+    if (duration != nil) {
+        guard let action: SKAction = SKAction(named: name, duration: duration!) else {
+            return SKAction()
+        }
+        
+        return action
+    }
     guard let action: SKAction = SKAction(named: name) else {
         return SKAction()
     }

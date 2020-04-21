@@ -16,21 +16,17 @@ class GameSceneTemplate: SKScene {
     enum Axies {
         case x,y
     }
+    enum Warp {
+        case entry,exit
+    }
     
     // MARK: - SceneConponents
     var currentState: State = .active
-    var sections = [Int]()
+    var level: Level = Level()
+    var changingSections: Bool = false
+    
     /// A Space is an area in a section
     var currentSpace: Space = .two
-    
-    var sectionOneAreas = [Space:SKSpriteNode]()
-    var sectionTwoAreas = [Space:SKSpriteNode]()
-    var sectionThreeAreas = [Space:SKSpriteNode]()
-    var sectionOne: Section?
-    var sectionTwo: Section?
-    var sectionThree: Section?
-    
-    var currentSection: Section?
     
     let moveJoystick = js(withDiameter: 100)
     
@@ -40,7 +36,6 @@ class GameSceneTemplate: SKScene {
     let s: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R"), size: CGSize(width: 320, height: 320))
     var walkingStarted = false
     var lastDirection = ""
-    var checkingPosition: Bool = false
     
     var joystickStickImageEnabled = true {
         didSet {
@@ -58,53 +53,48 @@ class GameSceneTemplate: SKScene {
     
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-        
-
 
         // SetupSpaces
         if let section1 = childNode(withName: "section1") {
-            sectionOne = Section(mainNode: section1, warps: [], sponPoints: [])
+            var section = Section(mainNode: section1, warps: [], sponPoints: [])
             if let node = section1.childNode(withName: "space1") as? SKSpriteNode {
-                sectionOne?.spaces[.one] = node
+                section.spaces[.one] = node
             }
             if let node = section1.childNode(withName: "space2") as? SKSpriteNode {
-                sectionOne?.spaces[.two] = node
+                section.spaces[.two] = node
             }
             if let node = section1.childNode(withName: "space3") as? SKSpriteNode {
-                sectionOne?.spaces[.three] = node
+                section.spaces[.three] = node
             }
-            if let warpOne = section1.childNode(withName: "warp1") as? SKSpriteNode  {
-                sectionOne?.exit = warpOne
+            if let warpOne = section1.childNode(withName: "exit") as? SKSpriteNode  {
+                section.exit = warpOne
             }
-            currentSection = sectionOne
+            if let sponPoint = section1.childNode(withName: "sponPoint2") {
+                section.sponTwo = sponPoint.position
+            }
+            
+            level.add(section: section)
         }
         if let section1 = childNode(withName: "section2") {
-            sectionTwo = Section(mainNode: section1, warps: [], sponPoints: [])
+            var section = Section(mainNode: section1, warps: [], sponPoints: [])
+            
             if let node = section1.childNode(withName: "space1") as? SKSpriteNode {
-                sectionTwo?.spaces[.one] = node
+                section.spaces[.one] = node
             }
             if let node = section1.childNode(withName: "space2") as? SKSpriteNode {
-                sectionTwo?.spaces[.two] = node
+                section.spaces[.two] = node
             }
             if let node = section1.childNode(withName: "space3") as? SKSpriteNode {
-                sectionTwo?.spaces[.three] = node
+                section.spaces[.three] = node
             }
             if let warpOne = section1.childNode(withName: "entry") as? SKSpriteNode  {
-                sectionTwo?.entry = warpOne
+                section.entry = warpOne
             }
-        }
-        if let section1 = childNode(withName: "section3") {
-            sectionThree = Section(mainNode: section1, warps: [], sponPoints: [])
-            sectionThree?.mainNode = section1
-            if let node = section1.childNode(withName: "space1") as? SKSpriteNode {
-                sectionThree?.spaces[.one] = node
+            if let sponPoint = section1.childNode(withName: "sponPoint1") {
+                section.sponOne = sponPoint.position
             }
-            if let node = section1.childNode(withName: "space2") as? SKSpriteNode {
-                sectionThree?.spaces[.two] = node
-            }
-            if let node = section1.childNode(withName: "space3") as? SKSpriteNode {
-                sectionThree?.spaces[.three] = node
-            }
+            
+            level.add(section: section)
         }
 
         setupPlayer()
@@ -114,14 +104,51 @@ class GameSceneTemplate: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
  
-        if let currentSection = currentSection {
-            checkTriggers(section: currentSection)
+        if let currentSection = level.currentSection() {
+                checkTriggers(section: currentSection)
         }
     }
     
-    func changeSections() {
-        currentSection = sectionTwo
-        camera?.run(.moveTo(y: currentSection?.mainNode.position.y ?? 0, duration: 0.6))
+    func changeSections(warp: Warp) {
+        if !changingSections {
+            changingSections = true
+            
+            switch warp {
+            case .entry:
+                guard let section = level.previousSection() else {
+                     return
+                 }
+                
+                
+                camera?.run(.moveTo(y: section.mainNode.position.y, duration: 0.8)) {
+                    let animMove: SKAction = .move(to: self.convert(section.sponTwo!, from: section.mainNode), duration: 0.8)
+                    let animDown: SKAction = protectedAction(with: "walkU")
+                    
+                    self.s.run(animDown)
+                    self.s.run(animMove) {
+                        self.s.removeAllActions()
+                        self.changingSections = false
+                    }
+                        
+                }
+            case .exit:
+                guard let section = level.nextSection() else {
+                    return
+                }
+                
+                camera?.run(.moveTo(y: section.mainNode.position.y, duration: 0.8)) {
+                    let animMove: SKAction = .move(to: self.convert(section.sponOne!, from: section.mainNode), duration: 0.8)
+                    let animDown: SKAction = protectedAction(with: "walkD")
+                    
+                    self.s.run(animDown)
+                    self.s.run(animMove) {
+                        self.s.removeAllActions()
+                        self.changingSections = false
+                    }
+                        
+                }
+            }
+        }
     }
     
     func checkTriggers(section: Section) {
@@ -130,9 +157,14 @@ class GameSceneTemplate: SKScene {
                 self.currentSpace = space
                 self.setCameraPos()
             }
-            if let warpOne = section.exit {
-                if warpOne.calculateAccumulatedFrame().contains(s.position) {
-                    self.changeSections()
+            if let exit = section.exit {
+                if exit.contains(convert(s.position, to: section.mainNode)) {
+                    self.changeSections(warp: .exit)
+                }
+            }
+            else if let entry = section.entry {
+                if entry.contains(convert(s.position, to: section.mainNode)) {
+                    self.changeSections(warp: .entry)
                 }
             }
         }
@@ -148,7 +180,7 @@ class GameSceneTemplate: SKScene {
     }
     
     func setCameraPos() {
-        camera?.run(.moveTo(x: currentSection?.camPosition?.getPos(space: currentSpace).x ?? 0, duration: 0.8))
+        camera?.run(.moveTo(x: level.currentSection()?.camPosition?.getPos(space: currentSpace).x ?? 0, duration: 0.8))
     }
     
     // MARK: Player setup
@@ -191,9 +223,7 @@ class GameSceneTemplate: SKScene {
         camera?.addChild(moveJoystickHiddenArea)
         
         //MARK: Handlers begin
-        moveJoystick.on(.begin) { [unowned self] _ in
-            
-        }
+        moveJoystick.on(.begin) { [unowned self] _ in }
         
         moveJoystick.on(.move) { [unowned self] joystick in
             let axies = self.chooseAxis(posx: joystick.velocity.x, posy: joystick.velocity.y)

@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "774AFE55-F998-4304-A407-CE6660256CB3"
+            uuid = "FEE91C72-AD93-4B86-B2D8-F6B706D4E918"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NobleSword-Beasts/SceneControllers/GameSceneTemplate.swift"
+            filePath = "NobleSword-Beasts/Objects/Level.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "didMove(to:)"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "nextSection()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "124A04BB-8B92-4A5C-82F1-DD867D2337C8"
+            uuid = "8B972960-0259-4D32-854E-CE42EF4D17C1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "NobleSword-Beasts/SceneControllers/GameSceneTemplate.swift"
+            filePath = "NobleSword-Beasts/Objects/Level.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "checkTriggers(section:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "previousSection()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
