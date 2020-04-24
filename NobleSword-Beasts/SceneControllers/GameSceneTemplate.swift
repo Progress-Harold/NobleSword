@@ -54,49 +54,7 @@ class GameSceneTemplate: SKScene {
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
 
-        // SetupSpaces
-        if let section1 = childNode(withName: "section1") {
-            var section = Section(mainNode: section1, warps: [], sponPoints: [])
-            if let node = section1.childNode(withName: "space1") as? SKSpriteNode {
-                section.spaces[.one] = node
-            }
-            if let node = section1.childNode(withName: "space2") as? SKSpriteNode {
-                section.spaces[.two] = node
-            }
-            if let node = section1.childNode(withName: "space3") as? SKSpriteNode {
-                section.spaces[.three] = node
-            }
-            if let warpOne = section1.childNode(withName: "exit") as? SKSpriteNode  {
-                section.exit = warpOne
-            }
-            if let sponPoint = section1.childNode(withName: "sponPoint2") {
-                section.sponTwo = sponPoint.position
-            }
-            
-            level.add(section: section)
-        }
-        if let section1 = childNode(withName: "section2") {
-            var section = Section(mainNode: section1, warps: [], sponPoints: [])
-            
-            if let node = section1.childNode(withName: "space1") as? SKSpriteNode {
-                section.spaces[.one] = node
-            }
-            if let node = section1.childNode(withName: "space2") as? SKSpriteNode {
-                section.spaces[.two] = node
-            }
-            if let node = section1.childNode(withName: "space3") as? SKSpriteNode {
-                section.spaces[.three] = node
-            }
-            if let warpOne = section1.childNode(withName: "entry") as? SKSpriteNode  {
-                section.entry = warpOne
-            }
-            if let sponPoint = section1.childNode(withName: "sponPoint1") {
-                section.sponOne = sponPoint.position
-            }
-            
-            level.add(section: section)
-        }
-
+        setUpSections()
         setupPlayer()
         handleMovment(with: view)
     }
@@ -109,6 +67,71 @@ class GameSceneTemplate: SKScene {
         }
     }
     
+    func setCameraPos() {
+        guard let section = level.currentSection() else {
+            return
+        }
+        
+        camera?.run(.move(to: convert((section.camPosition?.getPos(space: currentSpace))!, from: section.mainNode), duration: 0.8))
+    }
+    
+    func setUpSections() {
+        var counter = 0
+
+        children.forEach { node in
+            if let name = node.name {
+                if sectionInName(string: name) {
+                    counter += 1
+                }
+            }
+        }
+        
+        for n in 1...counter {
+            setSection(number: n)
+        }
+    }
+    
+    func setSection(number: Int) {
+        print("section\(number)")
+        if let sectionNode = childNode(withName: "section\(number)") {
+            var section = Section(mainNode: sectionNode, warps: [], sponPoints: [])
+            
+            if let node = sectionNode.childNode(withName: "space1") as? SKSpriteNode {
+                section.spaces[.one] = node
+            }
+            if let node = sectionNode.childNode(withName: "space2") as? SKSpriteNode {
+                section.spaces[.two] = node
+            }
+            if let node = sectionNode.childNode(withName: "space3") as? SKSpriteNode {
+                section.spaces[.three] = node
+            }
+            if let warpOne = sectionNode.childNode(withName: "entry") as? SKSpriteNode  {
+                section.entry = warpOne
+            }
+            if let warpOne = sectionNode.childNode(withName: "exit") as? SKSpriteNode  {
+                section.exit = warpOne
+            }
+            if let sponPoint = sectionNode.childNode(withName: "sponPoint1") {
+                section.sponOne = sponPoint.position
+            }
+            if let sponPoint = sectionNode.childNode(withName: "sponPoint2") {
+                section.sponTwo = sponPoint.position
+            }
+            
+            level.add(section: section)
+        }
+    }
+    
+    func sectionInName(string: String) -> Bool {
+        for c in "section" {
+            if !(string.contains(c)) {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
     func changeSections(warp: Warp) {
         if !changingSections {
             changingSections = true
@@ -119,37 +142,37 @@ class GameSceneTemplate: SKScene {
                      return
                  }
                 
-                
-                camera?.run(.moveTo(y: section.mainNode.position.y, duration: 0.8)) {
+                camera?.run(.move(to: section.mainNode.position, duration: 0.8)) {
                     let animMove: SKAction = .move(to: self.convert(section.sponTwo!, from: section.mainNode), duration: 0.8)
                     let animDown: SKAction = protectedAction(with: "walkU")
                     
                     self.s.run(animDown)
                     self.s.run(animMove) {
+                        self.setCameraPos()
                         self.s.removeAllActions()
                         self.changingSections = false
-                    }
-                        
+                    }     
                 }
             case .exit:
                 guard let section = level.nextSection() else {
                     return
                 }
                 
-                camera?.run(.moveTo(y: section.mainNode.position.y, duration: 0.8)) {
+                camera?.run(.move(to: section.mainNode.position, duration: 0.8)) {
                     let animMove: SKAction = .move(to: self.convert(section.sponOne!, from: section.mainNode), duration: 0.8)
                     let animDown: SKAction = protectedAction(with: "walkD")
                     
                     self.s.run(animDown)
                     self.s.run(animMove) {
+                        self.setCameraPos()
                         self.s.removeAllActions()
                         self.changingSections = false
                     }
-                        
                 }
             }
         }
     }
+
     
     func checkTriggers(section: Section) {
         for (space, node) in section.spaces {
@@ -157,12 +180,16 @@ class GameSceneTemplate: SKScene {
                 self.currentSpace = space
                 self.setCameraPos()
             }
-            if let exit = section.exit {
+        }
+        if let exit = section.exit {
+            if !changingSections {
                 if exit.contains(convert(s.position, to: section.mainNode)) {
                     self.changeSections(warp: .exit)
                 }
             }
-            else if let entry = section.entry {
+        }
+        if let entry = section.entry {
+            if !changingSections {
                 if entry.contains(convert(s.position, to: section.mainNode)) {
                     self.changeSections(warp: .entry)
                 }
@@ -179,21 +206,18 @@ class GameSceneTemplate: SKScene {
         }
     }
     
-    func setCameraPos() {
-        camera?.run(.moveTo(x: level.currentSection()?.camPosition?.getPos(space: currentSpace).x ?? 0, duration: 0.8))
-    }
     
     // MARK: Player setup
     
     func setupPlayer() {
             hero.configureAttributes()
             
-        hero.player.zPosition = 10
+        hero.player.zPosition = 5
         if let camera = self.childNode(withName: "camera") as? SKCameraNode {
             self.camera = camera
             setCameraPos()
             
-            self.s.zPosition = 10
+            self.s.zPosition = 5
             self.addChild(self.s)
 //            self.addChild(hero.player)
         }
@@ -239,6 +263,7 @@ class GameSceneTemplate: SKScene {
                     
                     self.lastDirection = "r"
                     self.s.position = CGPoint(x: self.s.position.x + 2, y: self.s.position.y)
+                    
                     if !self.walkingStarted {
                         self.walkingStarted = true
                         

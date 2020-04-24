@@ -37,7 +37,6 @@ struct Level {
         return sectionDict[currentSectionNumber]
     }
     
-    
     mutating func nextSection() -> Section? {
         let index = currentSectionNumber + 1
         
@@ -49,5 +48,4 @@ struct Level {
         print("No next section!")
         return nil
     }
-    
 }
