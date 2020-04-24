@@ -30,6 +30,10 @@ class GameSceneTemplate: SKScene {
     
     let moveJoystick = js(withDiameter: 100)
     
+    var attackButton = SKSpriteNode()
+    
+    var joystickView = SKSpriteNode()
+    
     var hero: Hero = Hero()
     
     // Tests
@@ -53,7 +57,15 @@ class GameSceneTemplate: SKScene {
     
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-
+        
+        if let node = camera?.childNode(withName: "AttackButton") as? SKSpriteNode {
+            attackButton = node
+        }
+        
+        if let node = camera?.childNode(withName: "jsNode") as? SKSpriteNode {
+            joystickView = node
+        }
+        
         setUpSections()
         setupPlayer()
         handleMovment(with: view)
@@ -225,7 +237,9 @@ class GameSceneTemplate: SKScene {
     }
     
     func touchDown(atPoint pos : CGPoint) {
-       
+        if attackButton.contains(convert(pos, to: camera!)) {
+            print("Attack!!!!")
+        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -237,13 +251,14 @@ class GameSceneTemplate: SKScene {
     }
     
     func handleMovment(with view: SKView) {
-        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 7, y: 13, width: 750, height: 1340))
+        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 7, y: 13, width: joystickView.size.width, height: joystickView.size.height))
         
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
         moveJoystickHiddenArea.zPosition = 10
-        moveJoystickHiddenArea.position = CGPoint(x: -320, y: -700)
+        moveJoystickHiddenArea.position = CGPoint(x: -200, y: -350)
         
+//        joystickView.addChild(moveJoystickHiddenArea)
         camera?.addChild(moveJoystickHiddenArea)
         
         //MARK: Handlers begin
