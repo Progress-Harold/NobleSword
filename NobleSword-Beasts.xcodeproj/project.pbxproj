@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A22DE69C243AD83B00F48522 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE69B243AD83B00F48522 /* AppDelegate.swift */; };
-		A22DE6A0243AD83B00F48522 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE69F243AD83B00F48522 /* Actions.sks */; };
+		A22DE6A0243AD83B00F48522 /* CharecterActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE69F243AD83B00F48522 /* CharecterActions.sks */; };
 		A22DE6A2243AD83B00F48522 /* GameSceneTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6A1243AD83B00F48522 /* GameSceneTemplate.swift */; };
 		A22DE6A4243AD83B00F48522 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6A3243AD83B00F48522 /* GameViewController.swift */; };
 		A22DE6A7243AD83B00F48522 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6A5243AD83B00F48522 /* Main.storyboard */; };
@@ -22,12 +22,13 @@
 		A22DE6DE243B067E00F48522 /* Title.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D7243B067D00F48522 /* Title.sks */; };
 		A22DE6DF243B067E00F48522 /* Red.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D8243B067D00F48522 /* Red.sks */; };
 		A22DE6E0243B067E00F48522 /* Green.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D9243B067D00F48522 /* Green.sks */; };
-		A22DE6E1243B067E00F48522 /* GreenSpirite.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DA243B067D00F48522 /* GreenSpirite.sks */; };
+		A22DE6E1243B067E00F48522 /* PurpleSpirite.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DA243B067D00F48522 /* PurpleSpirite.sks */; };
 		A22DE6E2243B067E00F48522 /* Blue.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DB243B067D00F48522 /* Blue.sks */; };
 		A22DE6E3243B067E00F48522 /* LifeGauge.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DC243B067E00F48522 /* LifeGauge.sks */; };
 		A22DE6E4243B067E00F48522 /* magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6DD243B067E00F48522 /* magic.sks */; };
 		A2573E72244D1B6B00801A72 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2573E71244D1B6B00801A72 /* Section.swift */; };
 		A2573E74244D4F3B00801A72 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2573E73244D4F3B00801A72 /* Level.swift */; };
+		A2B1F3BD2455304B0010C43D /* EnvironmentActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2B1F3BC2455304B0010C43D /* EnvironmentActions.sks */; };
 		A2B75D1C243C41700098870E /* TitleScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D1B243C41700098870E /* TitleScreen.sks */; };
 		A2B75D1E243C45FB0098870E /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1D243C45FB0098870E /* Hero.swift */; };
 		A2B75D20243C46330098870E /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B75D1F243C46330098870E /* Tools.swift */; };
@@ -36,6 +37,7 @@
 		A2B75D26243C4C3A0098870E /* SpiritForest.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D25243C4C3A0098870E /* SpiritForest.sks */; };
 		A2B75D29243C526E0098870E /* jSubstrate.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D27243C526E0098870E /* jSubstrate.png */; };
 		A2B75D2A243C526E0098870E /* jStick.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D28243C526E0098870E /* jStick.png */; };
+		A2D2B95A2454FD940097C899 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2B9592454FD930097C899 /* Enemy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +60,7 @@
 /* Begin PBXFileReference section */
 		A22DE698243AD83B00F48522 /* NobleSword-Beasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NobleSword-Beasts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22DE69B243AD83B00F48522 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A22DE69F243AD83B00F48522 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		A22DE69F243AD83B00F48522 /* CharecterActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CharecterActions.sks; sourceTree = "<group>"; };
 		A22DE6A1243AD83B00F48522 /* GameSceneTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneTemplate.swift; sourceTree = "<group>"; };
 		A22DE6A3243AD83B00F48522 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		A22DE6A6243AD83B00F48522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,12 +79,13 @@
 		A22DE6D7243B067D00F48522 /* Title.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Title.sks; sourceTree = "<group>"; };
 		A22DE6D8243B067D00F48522 /* Red.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Red.sks; sourceTree = "<group>"; };
 		A22DE6D9243B067D00F48522 /* Green.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Green.sks; sourceTree = "<group>"; };
-		A22DE6DA243B067D00F48522 /* GreenSpirite.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GreenSpirite.sks; sourceTree = "<group>"; };
+		A22DE6DA243B067D00F48522 /* PurpleSpirite.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PurpleSpirite.sks; sourceTree = "<group>"; };
 		A22DE6DB243B067D00F48522 /* Blue.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Blue.sks; sourceTree = "<group>"; };
 		A22DE6DC243B067E00F48522 /* LifeGauge.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LifeGauge.sks; sourceTree = "<group>"; };
 		A22DE6DD243B067E00F48522 /* magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic.sks; sourceTree = "<group>"; };
 		A2573E71244D1B6B00801A72 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		A2573E73244D4F3B00801A72 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		A2B1F3BC2455304B0010C43D /* EnvironmentActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EnvironmentActions.sks; sourceTree = "<group>"; };
 		A2B75D1B243C41700098870E /* TitleScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleScreen.sks; sourceTree = "<group>"; };
 		A2B75D1D243C45FB0098870E /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		A2B75D1F243C46330098870E /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		A2B75D25243C4C3A0098870E /* SpiritForest.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SpiritForest.sks; sourceTree = "<group>"; };
 		A2B75D27243C526E0098870E /* jSubstrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jSubstrate.png; sourceTree = "<group>"; };
 		A2B75D28243C526E0098870E /* jStick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jStick.png; sourceTree = "<group>"; };
+		A2D2B9592454FD930097C899 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,7 +204,7 @@
 			children = (
 				A22DE6DB243B067D00F48522 /* Blue.sks */,
 				A22DE6D9243B067D00F48522 /* Green.sks */,
-				A22DE6DA243B067D00F48522 /* GreenSpirite.sks */,
+				A22DE6DA243B067D00F48522 /* PurpleSpirite.sks */,
 				A22DE6DC243B067E00F48522 /* LifeGauge.sks */,
 				A22DE6DD243B067E00F48522 /* magic.sks */,
 				A22DE6D8243B067D00F48522 /* Red.sks */,
@@ -217,6 +221,7 @@
 				A2B75D23243C48E20098870E /* Joystick.swift */,
 				A2573E71244D1B6B00801A72 /* Section.swift */,
 				A2573E73244D4F3B00801A72 /* Level.swift */,
+				A2D2B9592454FD930097C899 /* Enemy.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -233,7 +238,8 @@
 		A29BCBCA244C3AA500A7B000 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				A22DE69F243AD83B00F48522 /* Actions.sks */,
+				A22DE69F243AD83B00F48522 /* CharecterActions.sks */,
+				A2B1F3BC2455304B0010C43D /* EnvironmentActions.sks */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 				A2B75D26243C4C3A0098870E /* SpiritForest.sks in Resources */,
 				A22DE6D5243B044B00F48522 /* Prelude.mov in Resources */,
 				A22DE6A7243AD83B00F48522 /* Main.storyboard in Resources */,
+				A2B1F3BD2455304B0010C43D /* EnvironmentActions.sks in Resources */,
 				A22DE6DE243B067E00F48522 /* Title.sks in Resources */,
 				A22DE6E2243B067E00F48522 /* Blue.sks in Resources */,
 				A2B75D2A243C526E0098870E /* jStick.png in Resources */,
@@ -374,8 +381,8 @@
 				A22DE6A9243AD83D00F48522 /* Assets.xcassets in Resources */,
 				A22DE6DF243B067E00F48522 /* Red.sks in Resources */,
 				A22DE6AC243AD83D00F48522 /* LaunchScreen.storyboard in Resources */,
-				A22DE6A0243AD83B00F48522 /* Actions.sks in Resources */,
-				A22DE6E1243B067E00F48522 /* GreenSpirite.sks in Resources */,
+				A22DE6A0243AD83B00F48522 /* CharecterActions.sks in Resources */,
+				A22DE6E1243B067E00F48522 /* PurpleSpirite.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +410,7 @@
 				A2573E72244D1B6B00801A72 /* Section.swift in Sources */,
 				A2B75D22243C470F0098870E /* AnimationsReference.swift in Sources */,
 				A2B75D24243C48E20098870E /* Joystick.swift in Sources */,
+				A2D2B95A2454FD940097C899 /* Enemy.swift in Sources */,
 				A2B75D1E243C45FB0098870E /* Hero.swift in Sources */,
 				A22DE6A2243AD83B00F48522 /* GameSceneTemplate.swift in Sources */,
 				A22DE6D1243B011900F48522 /* TitleScreenScene.swift in Sources */,

@@ -30,6 +30,22 @@ public func protectedAction(with name: String, duration: TimeInterval? = nil) ->
     return action
 }
 
+func newEmitter(with scene: SKScene, position: CGPoint, file: String) -> SKEmitterNode {
+    guard let emitter = SKEmitterNode(fileNamed: file) else {
+        print("fail")
+        return SKEmitterNode(fileNamed: "LifeGauge")!
+    }
+    
+    emitter.position = position
+    emitter.xScale = 1
+    emitter.yScale = 1
+    
+    emitter.targetNode = scene
+    emitter.alpha = 0
+    
+    return emitter
+}
+
 public func basicCollider(for physicsBody: SKPhysicsBody) {
     physicsBody.restitution = 0
     physicsBody.linearDamping = 0.1
