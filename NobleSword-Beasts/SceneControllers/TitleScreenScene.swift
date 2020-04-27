@@ -136,7 +136,7 @@ class TitleScreenScene: SKScene {
         
         if let blue = self.camera?.childNode(withName: "blue") as? SKEmitterNode {
             
-            blueEmitter = self.newEmitter(with: self, position: blue.position, file: "Blue")
+            blueEmitter = newEmitter(with: self, position: blue.position, file: "Blue")
             
             //            blueEmitter?.alpha = 0
             
@@ -144,7 +144,7 @@ class TitleScreenScene: SKScene {
         }
         if let red = self.camera?.childNode(withName: "red") as? SKEmitterNode {
             
-            redEmitter = self.newEmitter(with: self, position: red.position, file: "Red")
+            redEmitter = newEmitter(with: self, position: red.position, file: "Red")
             
             redEmitter?.alpha = 0
             
@@ -153,7 +153,7 @@ class TitleScreenScene: SKScene {
         
         if let green = self.camera?.childNode(withName: "green") as? SKEmitterNode {
             
-            greenEmitter = self.newEmitter(with: self, position: green.position, file: "Green")
+            greenEmitter = newEmitter(with: self, position: green.position, file: "Green")
             
             greenEmitter?.alpha = 0
             
@@ -202,7 +202,7 @@ class TitleScreenScene: SKScene {
             self.title?.alpha = 1
             self.tap?.alpha = 1
             self.spirit?.alpha = 1
-            self.spE = self.newEmitter(with: self, position: (self.spE?.position)!, file: "Title")
+            self.spE = newEmitter(with: self, position: (self.spE?.position)!, file: "Title")
             self.spE?.alpha = 1
             self.spE?.zPosition = -8
 //
@@ -221,20 +221,6 @@ class TitleScreenScene: SKScene {
     }
     
     
-    func newEmitter(with scene: SKScene, position: CGPoint, file: String) -> SKEmitterNode {
-        guard let emitter = SKEmitterNode(fileNamed: file) else {
-            print("fail")
-            return SKEmitterNode(fileNamed: "LifeGauge")! 
-        }
-        
-        emitter.position = position
-        emitter.xScale = 1
-        emitter.yScale = 1
-        
-        emitter.targetNode = scene
-        emitter.alpha = 0
-        
-        return emitter
-    }
+    
     
 }

@@ -35,11 +35,14 @@ class GameSceneTemplate: SKScene {
     var joystickView = SKSpriteNode()
     
     var hero: Hero = Hero()
+    var enemies: [Enemy] = []
     
     // Tests
     let s: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R"), size: CGSize(width: 320, height: 320))
     var walkingStarted = false
     var lastDirection = ""
+    var purpleEmitter: SKEmitterNode = SKEmitterNode()
+    var trap: SKSpriteNode = SKSpriteNode()
     
     var joystickStickImageEnabled = true {
         didSet {
@@ -67,6 +70,8 @@ class GameSceneTemplate: SKScene {
         }
         
         setUpSections()
+        animateTraps()
+        setupEnemy()
         setupPlayer()
         handleMovment(with: view)
     }
@@ -107,6 +112,32 @@ class GameSceneTemplate: SKScene {
         print("section\(number)")
         if let sectionNode = childNode(withName: "section\(number)") {
             var section = Section(mainNode: sectionNode, warps: [], sponPoints: [])
+            
+            if let trap1 = sectionNode.childNode(withName: "trap") as? SKSpriteNode {
+                self.trap = trap1
+            }
+            
+           let eArr = sectionNode.children.filter { (node) -> Bool in
+                return (node.name == "enemy")
+            }
+            
+            for e in eArr {
+                if let sprite =  e as? SKSpriteNode {
+                    enemies.append(Enemy(node: sprite))
+                }
+            }
+            
+            if let env = sectionNode.childNode(withName: "environment") {
+                if let piller = env.childNode(withName: "piller") as? SKSpriteNode {
+                    if let purple = piller.childNode(withName: "flame") as? SKEmitterNode {
+                        
+                        purpleEmitter = newEmitter(with: self, position: purple.position, file: "PurpleSpirite")
+                        purpleEmitter.zPosition = 20
+                        self.addChild(purpleEmitter)
+                    }
+                    
+                }
+            }
             
             if let node = sectionNode.childNode(withName: "space1") as? SKSpriteNode {
                 section.spaces[.one] = node
@@ -185,6 +216,15 @@ class GameSceneTemplate: SKScene {
         }
     }
 
+    func animateTraps() {
+        let action = protectedAction(with: "normSpikeTrap")
+        trap.run(action) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.animateTraps()
+                
+            }
+        }
+    }
     
     func checkTriggers(section: Section) {
         for (space, node) in section.spaces {
@@ -215,6 +255,23 @@ class GameSceneTemplate: SKScene {
         }
         else {
             return .y
+        }
+    }
+    
+    // Mark: Enemy
+    
+    func setupEnemy() {
+        for e in enemies {
+            e.randomDirection()
+            if let action = e.moveActionForCurrentDirection() {
+                e.spriteNode.run(action)
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            if self.enemies.count != 0 {
+                self.setupEnemy()
+            }
         }
     }
     
@@ -256,6 +313,7 @@ class GameSceneTemplate: SKScene {
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
         moveJoystickHiddenArea.zPosition = 10
+        moveJoystickHiddenArea.alpha = 0.001
         moveJoystickHiddenArea.position = CGPoint(x: -200, y: -350)
         
 //        joystickView.addChild(moveJoystickHiddenArea)
