@@ -58,6 +58,11 @@ class GameSceneTemplate: SKScene {
         }
     }
     
+    var minX: CGFloat = -90
+    var maxX: CGFloat = 135
+    var minY: CGFloat = -165
+    var maxY: CGFloat = 207
+    
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         
@@ -82,14 +87,63 @@ class GameSceneTemplate: SKScene {
         if let currentSection = level.currentSection() {
                 checkTriggers(section: currentSection)
         }
+        followPlayer()
     }
     
-    func setCameraPos() {
+    func followPlayer() {
         guard let section = level.currentSection() else {
             return
         }
         
-        camera?.run(.move(to: convert((section.camPosition?.getPos(space: currentSpace))!, from: section.mainNode), duration: 0.8))
+        var canMoveMinX = true
+        var canMoveMaxX = true
+        var canMoveMinY = true
+        var canMoveMaxY = true
+        
+        var canMoveX = false
+        var canMoveY = false
+        
+        if camera?.position.x == minX {
+            canMoveMinX = false
+        }
+        
+        if (camera?.position.x == maxX) {
+            canMoveMaxX = false
+        }
+        
+        if camera?.position.y == minY {
+            canMoveMinY = false
+        }
+        
+        if (camera?.position.y == maxY) {
+            canMoveMaxY = false
+        }
+        
+        if ((canMoveMinX) && s.position.x > minX) && ((canMoveMaxX) && s.position.x < maxX) {
+            canMoveX = true
+        }
+        
+        if ((canMoveMinY) && s.position.y > minY) && ((canMoveMaxY) && s.position.y < maxY) {
+            canMoveY = true
+        }
+        
+        if (canMoveX && canMoveY) {
+            camera?.run(.move(to: convert(self.s.position, to: section.mainNode), duration: 0.4))
+        }
+        else if canMoveX && !(canMoveY) {
+            camera?.run(.moveTo(x: convert(self.s.position, to: section.mainNode).x, duration: 0.4))
+        }
+        else if !(canMoveX) && canMoveY {
+            camera?.run(.moveTo(y: convert(self.s.position, to: section.mainNode).y, duration: 0.4))
+        }
+    }
+    
+    func setCameraPos() {
+//        guard let section = level.currentSection() else {
+//            return
+//        }
+//
+//        camera?.run(.move(to: convert((section.camPosition?.getPos(space: currentSpace))!, from: section.mainNode), duration: 0.8))
     }
     
     func setUpSections() {
@@ -229,7 +283,6 @@ class GameSceneTemplate: SKScene {
         for (space, node) in section.spaces {
             if node.contains(convert(s.position, to: section.mainNode)) {
                 self.currentSpace = space
-                self.setCameraPos()
             }
         }
         if let exit = section.exit {
