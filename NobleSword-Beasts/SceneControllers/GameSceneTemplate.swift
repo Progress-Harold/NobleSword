@@ -275,7 +275,6 @@ class GameSceneTemplate: SKScene {
         trap.run(action) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.animateTraps()
-                
             }
         }
     }
@@ -361,15 +360,14 @@ class GameSceneTemplate: SKScene {
     }
     
     func handleMovment(with view: SKView) {
-        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rect: CGRect(x: 7, y: 13, width: joystickView.size.width, height: joystickView.size.height))
+        let moveJoystickHiddenArea = TLAnalogJoystickHiddenArea(rectOf: joystickView.size)//TLAnalogJoystickHiddenArea(rect: CGRect(x: 13, y: 7, width: joystickView.size.width, height: joystickView.size.height))
         
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
         moveJoystickHiddenArea.zPosition = 10
-        moveJoystickHiddenArea.alpha = 0.001
-        moveJoystickHiddenArea.position = CGPoint(x: -200, y: -350)
+        moveJoystickHiddenArea.alpha = 0.01
+        moveJoystickHiddenArea.position = CGPoint(x: -100, y: 0)
         
-//        joystickView.addChild(moveJoystickHiddenArea)
         camera?.addChild(moveJoystickHiddenArea)
         
         //MARK: Handlers begin
