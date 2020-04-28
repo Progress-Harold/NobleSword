@@ -221,7 +221,6 @@ class GameSceneTemplate: SKScene {
         trap.run(action) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.animateTraps()
-                
             }
         }
     }
