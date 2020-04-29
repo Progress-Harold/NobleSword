@@ -19,7 +19,7 @@ class Hero {
     
     var lastDirection: PlayerDirection = .leftDirection
     
-    var player = SKSpriteNode()
+    var player: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R_idle"))
     let attackReferenceNode = SKNode()
     
     var hasKey: Bool = false
