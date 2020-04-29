@@ -12,40 +12,32 @@ import Foundation
 public class AnimationsReference {
     struct PlayerActions {
         struct Movement {
-            static var moveLeft: String = "moveLeft"
-            static var moveUpperLeft: String = "moveUpperLeft"
-            static var moveLowerLeft: String = "moveLowerLeft"
-            
-            
-            static var moveRight: String = "moveRight"
-            static var moveUpperRight: String = "moveUpperRight"
-            static var moveLowerRight: String = "moveUpperRight"
-            
-            
-            static var moveUp: String = "moveUp"
-            static var moveDown: String = "moveDown"
+            static var moveLeft: String = "walkL"
+            static var moveRight: String = "walkR"
+            static var moveUp: String = "walkU"
+            static var moveDown: String = "walkD"
             
             // Dashing
-            static var dashLeft: String = "dashLeft"
-            static var dashRight: String = "dashRight"
-            static var dashUp: String = "dashUp"
-            static var dashDown: String = "dashDown"
+            static var dashLeft: String = "dashL"
+            static var dashRight: String = "dashR"
+            static var dashUp: String = "dashU"
+            static var dashDown: String = "dashD"
         }
         
         struct Attacks {
-            static var attackLeft: String = "attackLeft"
-            static var attackRight: String = "attackRight"
-            static var attackUp: String = "attackUp"
-            static var attackDown: String = "attackDown"
+            static var attackLeft: String = "attackL"
+            static var attackRight: String = "attackR"
+            static var attackUp: String = "attackU"
+            static var attackDown: String = "attackD"
         }
     }
     
     struct SpiritForest {
         struct Enemies {
-            static var attackL: String = "AttackL"
-            static var attackR: String = "AttackR"
-            static var uAttackL: String = "UAttackL"
-            static var uAttackR: String = "UAttackR"
+            static var attackL: String = "attackLE"
+            static var attackR: String = "attackRE"
+            static var attackU: String = "attackUE"
+            static var attackD: String = "attackDE"
         }
     }
 }

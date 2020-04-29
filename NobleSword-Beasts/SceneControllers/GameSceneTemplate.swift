@@ -3,10 +3,11 @@
 //  NobleSword-Beasts
 //
 //  Created by Lee Davis on 4/5/20.
-//  Copyright © 2020 EightFoldGames. All rights reserved.
+//  Copyright © 2020 EightFoldGamehero.player. All rights reserved.
 //
 
 import SpriteKit
+import GameController
 
 class GameSceneTemplate: SKScene {
     // MARK: Enums
@@ -27,18 +28,22 @@ class GameSceneTemplate: SKScene {
     
     /// A Space is an area in a section
     var currentSpace: Space = .two
-    
+
+    var CM = ControlManager.shared
     let moveJoystick = js(withDiameter: 100)
+    var joystickView = SKSpriteNode()
     
     var attackButton = SKSpriteNode()
     
-    var joystickView = SKSpriteNode()
-    
+    // Player Stuff
     var hero: Hero = Hero()
+    typealias playerMovement = AnimationsReference.PlayerActions.Movement
+    
+    
     var enemies: [Enemy] = []
     
     // Tests
-    let s: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R"), size: CGSize(width: 320, height: 320))
+//    let s: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R"), size: CGSize(width: 320, height: 320))
     var walkingStarted = false
     var lastDirection = ""
     var purpleEmitter: SKEmitterNode = SKEmitterNode()
@@ -65,6 +70,10 @@ class GameSceneTemplate: SKScene {
     
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+
+        setUpControllerObservers()
+        connectController()
+        CM.delegate = self
         
         if let node = camera?.childNode(withName: "AttackButton") as? SKSpriteNode {
             attackButton = node
@@ -119,22 +128,22 @@ class GameSceneTemplate: SKScene {
             canMoveMaxY = false
         }
         
-        if ((canMoveMinX) && s.position.x > minX) && ((canMoveMaxX) && s.position.x < maxX) {
+        if ((canMoveMinX) && hero.player.position.x > minX) && ((canMoveMaxX) && hero.player.position.x < maxX) {
             canMoveX = true
         }
         
-        if ((canMoveMinY) && s.position.y > minY) && ((canMoveMaxY) && s.position.y < maxY) {
+        if ((canMoveMinY) && hero.player.position.y > minY) && ((canMoveMaxY) && hero.player.position.y < maxY) {
             canMoveY = true
         }
         
         if (canMoveX && canMoveY) {
-            camera?.run(.move(to: convert(self.s.position, to: section.mainNode), duration: 0.4))
+            camera?.run(.move(to: convert(self.hero.player.position, to: section.mainNode), duration: 0.4))
         }
         else if canMoveX && !(canMoveY) {
-            camera?.run(.moveTo(x: convert(self.s.position, to: section.mainNode).x, duration: 0.4))
+            camera?.run(.moveTo(x: convert(self.hero.player.position, to: section.mainNode).x, duration: 0.4))
         }
         else if !(canMoveX) && canMoveY {
-            camera?.run(.moveTo(y: convert(self.s.position, to: section.mainNode).y, duration: 0.4))
+            camera?.run(.moveTo(y: convert(self.hero.player.position, to: section.mainNode).y, duration: 0.4))
         }
     }
     
@@ -147,8 +156,8 @@ class GameSceneTemplate: SKScene {
     }
     
     func masaAttack() {
-        s.run(protectedAction(with: "attackR")) {
-            self.s.removeAllActions()
+        hero.player.run(protectedAction(with: "attackR")) {
+            self.hero.player.removeAllActions()
         }
     }
     
@@ -249,10 +258,10 @@ class GameSceneTemplate: SKScene {
                     let animMove: SKAction = .move(to: self.convert(section.sponTwo!, from: section.mainNode), duration: 0.8)
                     let animDown: SKAction = protectedAction(with: "walkU")
                     
-                    self.s.run(animDown)
-                    self.s.run(animMove) {
+                    self.hero.player.run(animDown)
+                    self.hero.player.run(animMove) {
                         self.setCameraPos()
-                        self.s.removeAllActions()
+                        self.hero.player.removeAllActions()
                         self.changingSections = false
                     }     
                 }
@@ -265,10 +274,10 @@ class GameSceneTemplate: SKScene {
                     let animMove: SKAction = .move(to: self.convert(section.sponOne!, from: section.mainNode), duration: 0.8)
                     let animDown: SKAction = protectedAction(with: "walkD")
                     
-                    self.s.run(animDown)
-                    self.s.run(animMove) {
+                    self.hero.player.run(animDown)
+                    self.hero.player.run(animMove) {
                         self.setCameraPos()
-                        self.s.removeAllActions()
+                        self.hero.player.removeAllActions()
                         self.changingSections = false
                     }
                 }
@@ -287,20 +296,20 @@ class GameSceneTemplate: SKScene {
     
     func checkTriggers(section: Section) {
         for (space, node) in section.spaces {
-            if node.contains(convert(s.position, to: section.mainNode)) {
+            if node.contains(convert(hero.player.position, to: section.mainNode)) {
                 self.currentSpace = space
             }
         }
         if let exit = section.exit {
             if !changingSections {
-                if exit.contains(convert(s.position, to: section.mainNode)) {
+                if exit.contains(convert(hero.player.position, to: section.mainNode)) {
                     self.changeSections(warp: .exit)
                 }
             }
         }
         if let entry = section.entry {
             if !changingSections {
-                if entry.contains(convert(s.position, to: section.mainNode)) {
+                if entry.contains(convert(hero.player.position, to: section.mainNode)) {
                     self.changeSections(warp: .entry)
                 }
             }
@@ -344,11 +353,9 @@ class GameSceneTemplate: SKScene {
             self.camera = camera
             setCameraPos()
             
-            self.s.zPosition = 5
-            self.addChild(self.s)
-//            self.addChild(hero.player)
+            self.hero.player.zPosition = 5
+            self.addChild(self.hero.player)
         }
-        
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -371,13 +378,13 @@ class GameSceneTemplate: SKScene {
         moveJoystickHiddenArea.joystick = moveJoystick
         moveJoystick.isMoveable = true
         moveJoystickHiddenArea.zPosition = 10
-        moveJoystickHiddenArea.alpha = 0.01
+        moveJoystickHiddenArea.alpha = 0.00001
         moveJoystickHiddenArea.position = CGPoint(x: -100, y: 0)
         
         camera?.addChild(moveJoystickHiddenArea)
         
         //MARK: Handlers begin
-        moveJoystick.on(.begin) { [unowned self] _ in }
+//        moveJoystick.on(.begin) { [unowned self] _ in }
         
         moveJoystick.on(.move) { [unowned self] joystick in
             let axies = self.chooseAxis(posx: joystick.velocity.x, posy: joystick.velocity.y)
@@ -385,84 +392,23 @@ class GameSceneTemplate: SKScene {
             switch axies {
             case .x:
                 if (joystick.velocity.x >= 1.0) {
-                    print("right")
-                    if self.lastDirection != "r" {
-                        self.walkingStarted = false
-                        self.s.removeAllActions()
-                    }
-                    
-                    self.lastDirection = "r"
-                    self.s.position = CGPoint(x: self.s.position.x + 2, y: self.s.position.y)
-                    
-                    if !self.walkingStarted {
-                        self.walkingStarted = true
-                        
-                        DispatchQueue.main.async {
-                            self.s.run(protectedAction(with: "walkR"))
-                        }
-                    }
-                    // self.hero.player.position = CGPoint(x: self.hero.player.position.x + 2, y: self.hero.player.position.y)
+                    self.moveRight()
                 }
                 else if (joystick.velocity.x <= -1.0) {
-                    print("left")
-                    if self.lastDirection != "l" {
-                        self.walkingStarted = false
-                        self.s.removeAllActions()
-                        
-                    }
-                    
-                    self.lastDirection = "l"
-                    self.s.position = CGPoint(x: self.s.position.x - 2, y: self.s.position.y)
-                    if !self.walkingStarted {
-                        self.walkingStarted = true
-                        
-                        DispatchQueue.main.async {
-                            self.s.run(protectedAction(with: "walkL"))
-                        }
-                    }
+                    self.moveLeft()
                 }
             case .y:
                 if (joystick.velocity.y >= 1.0) {
-                    print("up")
-                    if self.lastDirection != "u" {
-                        self.walkingStarted = false
-                        self.s.removeAllActions()
-                        
-                    }
-                    
-                    self.lastDirection = "u"
-                    self.s.position = CGPoint(x: self.s.position.x, y: self.s.position.y + 2)
-                    if !self.walkingStarted {
-                        self.walkingStarted = true
-                        
-                        DispatchQueue.main.async {
-                            self.s.run(protectedAction(with: "walkU"))
-                        }
-                    }
+                    self.moveUp()
                 }
                 else if (joystick.velocity.y <= -1.0) {
-                    print("down")
-                    if self.lastDirection != "d" {
-                        self.s.removeAllActions()
-                        
-                        self.walkingStarted = false
-                    }
-                    
-                    self.lastDirection = "d"
-                    self.s.position = CGPoint(x: self.s.position.x, y: self.s.position.y - 2)
-                    if !self.walkingStarted {
-                        self.walkingStarted = true
-                        
-                        DispatchQueue.main.async {
-                            self.s.run(protectedAction(with: "walkD"))
-                        }
-                    }
+                    self.moveDown()
                 }
             }
         }
         
         moveJoystick.on(.end) { [unowned self] _ in
-            self.s.removeAllActions()
+            self.hero.player.removeAllActions()
             self.walkingStarted = false
         }
         
@@ -492,4 +438,206 @@ extension GameSceneTemplate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
+}
+
+
+extension GameSceneTemplate: ControllerDelegate {
+    func moveUp() {
+        print("up")
+        if self.hero.lastDirection != .upDirection  {
+            self.walkingStarted = false
+            self.hero.player.removeAllActions()
+            
+        }
+        
+        self.hero.lastDirection = .upDirection
+        self.hero.player.position = CGPoint(x: self.hero.player.position.x, y: self.hero.player.position.y + 2)
+        if !self.walkingStarted {
+            self.walkingStarted = true
+            
+            DispatchQueue.main.async {
+                self.hero.player.run(protectedAction(with: playerMovement.moveUp))
+            }
+        }
+    }
+    
+    func moveDown() {
+        print("down")
+        if self.hero.lastDirection != .downDirection {
+            self.hero.player.removeAllActions()
+            
+            self.walkingStarted = false
+        }
+        
+        self.hero.lastDirection = .downDirection
+        self.hero.player.position = CGPoint(x: self.hero.player.position.x, y: self.hero.player.position.y - 2)
+        if !self.walkingStarted {
+            self.walkingStarted = true
+            
+            DispatchQueue.main.async {
+                self.hero.player.run(protectedAction(with: playerMovement.moveDown))
+            }
+        }
+    }
+    
+    func moveLeft() {
+        print("left")
+        if self.hero.lastDirection != .leftDirection {
+            self.walkingStarted = false
+            self.hero.player.removeAllActions()
+            
+        }
+        
+        self.hero.lastDirection = .leftDirection
+        self.hero.player.position = CGPoint(x: self.hero.player.position.x - 2, y: self.hero.player.position.y)
+        if !self.walkingStarted {
+            self.walkingStarted = true
+            
+            DispatchQueue.main.async {
+                self.hero.player.run(protectedAction(with: playerMovement.moveLeft))
+            }
+        }
+    }
+    
+    func moveRight() {
+        print("right")
+        if self.hero.lastDirection != .rightDirection {
+            self.walkingStarted = false
+            self.hero.player.removeAllActions()
+        }
+        
+        self.hero.lastDirection = .rightDirection
+        self.hero.player.position = CGPoint(x: self.hero.player.position.x + 2, y: self.hero.player.position.y)
+        
+        if !self.walkingStarted {
+            self.walkingStarted = true
+            
+            DispatchQueue.main.async {
+                self.hero.player.run(protectedAction(with: playerMovement.moveRight))
+            }
+        }
+    }
+    
+    func select() {
+        
+    }
+    
+    func cancel() {
+        
+    }
+    
+    func goUp(_ value: Float) {
+        moveUp()
+    }
+    
+    func goDown(_ value: Float) {
+        moveDown()
+    }
+    
+    func goRight(_ value: Float) {
+        moveRight()
+    }
+    
+    func goLeft(_ value: Float) {
+        moveLeft()
+    }
+    
+    func pause() {
+        
+    }
+    
+    func attack() {
+        
+    }
+    
+    func doNothing() {
+        
+    }
+    
+    open func setUpControllerObservers() {
+            NotificationCenter.default.addObserver(self, selector: #selector(connectController), name: NSNotification.Name.GCControllerDidConnect , object: nil)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(controllersDisconnected), name: NSNotification.Name.GCControllerDidDisconnect , object: nil)
+            
+        }
+        
+        
+        @objc open func connectController() {
+            for controller in GCController.controllers() {
+                
+                if (controller.extendedGamepad != nil && controller.playerIndex == .indexUnset) {
+                    controller.playerIndex = .index1
+                    
+                    
+                    controller.extendedGamepad?.valueChangedHandler = nil
+                    setUpExtendedController(controller: controller)
+                }
+                else if (controller.gamepad != nil && controller.playerIndex == .indexUnset) {
+                    controller.playerIndex = .index1
+                    
+                    
+                    controller.gamepad?.valueChangedHandler = nil
+                    
+                }
+                else if (controller.microGamepad != nil && controller.playerIndex == .indexUnset) {
+                    controller.playerIndex = .index1
+                    
+                    controller.microGamepad?.valueChangedHandler = nil
+                    setUpMicroController(controller: controller)
+                    
+                }
+                
+                
+            }
+            
+            for controller in GCController.controllers() {
+                if (controller.extendedGamepad != nil) {
+                    // ignore extended
+                }
+                else if (controller.gamepad != nil ) {
+                    // ignore standard
+                    
+                }
+                else if (controller.microGamepad != nil && controller.playerIndex == .indexUnset) {
+                    controller.playerIndex = .index1
+                    
+                }
+                
+            }
+            
+        }
+    
+    @objc func controllersDisconnected() {
+        /*
+        Options:
+            - Do something when controller is is disconected
+            - check what controllers are still connected if any
+            - bring up headsUp display with option to reset controller
+        */
+    }
+    
+    func setUpExtendedController(controller: GCController) {
+        controller.extendedGamepad?.valueChangedHandler = {
+            (gamepad:GCExtendedGamepad, element: GCControllerElement) in
+            
+            // TODO: Multiplayer functionality
+            //            if (gamepad.controller?.playerIndex == .index1) {
+            //
+            //
+            //            }
+            
+            
+            self.CM.gameplayMode(gamepad, nil, element)
+        }
+    }
+    
+    func setUpMicroController(controller: GCController) {
+        controller.microGamepad?.valueChangedHandler = {
+            (gamepad: GCMicroGamepad, element: GCControllerElement) in
+            
+            
+            self.CM.gameplayMode(nil, gamepad, element)
+        }
+    }
+
 }

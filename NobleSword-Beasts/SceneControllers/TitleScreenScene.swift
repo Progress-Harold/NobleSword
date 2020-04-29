@@ -202,11 +202,10 @@ class TitleScreenScene: SKScene {
             self.title?.alpha = 1
             self.tap?.alpha = 1
             self.spirit?.alpha = 1
-            self.spE = newEmitter(with: self, position: (self.spE?.position)!, file: "Title")
-            self.spE?.alpha = 1
-            self.spE?.zPosition = -8
-//
-            self.addChild(self.spE!)
+//            self.spE = newEmitter(with: self, position: (self.spE?.position)!, file: "Title")
+//            self.spE?.alpha = 1
+//            self.spE?.zPosition = -8
+//            self.addChild(self.spE!)
             
             let flashNode = SKSpriteNode(color: .white, size: self.size)
             flashNode.alpha = 0
