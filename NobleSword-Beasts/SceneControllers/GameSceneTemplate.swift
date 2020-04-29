@@ -146,6 +146,12 @@ class GameSceneTemplate: SKScene {
 //        camera?.run(.move(to: convert((section.camPosition?.getPos(space: currentSpace))!, from: section.mainNode), duration: 0.8))
     }
     
+    func masaAttack() {
+        s.run(protectedAction(with: "attackR")) {
+            self.s.removeAllActions()
+        }
+    }
+    
     func setUpSections() {
         var counter = 0
 
@@ -347,7 +353,7 @@ class GameSceneTemplate: SKScene {
     
     func touchDown(atPoint pos : CGPoint) {
         if attackButton.contains(convert(pos, to: camera!)) {
-            print("Attack!!!!")
+            masaAttack()
         }
     }
     
