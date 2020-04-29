@@ -156,8 +156,8 @@ class GameSceneTemplate: SKScene {
     }
     
     func masaAttack() {
-        s.run(protectedAction(with: "attackR")) {
-            self.s.removeAllActions()
+        hero.player.run(protectedAction(with: "attackR")) {
+            self.hero.player.removeAllActions()
         }
     }
     
