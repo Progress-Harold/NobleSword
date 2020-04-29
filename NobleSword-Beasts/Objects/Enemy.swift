@@ -45,6 +45,9 @@ class Enemy {
     
     var spriteNode: SKSpriteNode = SKSpriteNode()
     
+    // MARK: Enemy Hp
+    var enemyHp: Int = 3
+    
     init(node: SKSpriteNode) {
             self.spriteNode = node
             self.currentPosition = node.position

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E6141E4245A4B69009CD7C0 /* TestGrounds.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8E6141E3245A4B69009CD7C0 /* TestGrounds.sks */; };
 		A22DE69C243AD83B00F48522 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE69B243AD83B00F48522 /* AppDelegate.swift */; };
 		A22DE6A0243AD83B00F48522 /* CharecterActions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A22DE69F243AD83B00F48522 /* CharecterActions.sks */; };
 		A22DE6A2243AD83B00F48522 /* GameSceneTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6A1243AD83B00F48522 /* GameSceneTemplate.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E6141E3245A4B69009CD7C0 /* TestGrounds.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestGrounds.sks; sourceTree = "<group>"; };
 		A22DE698243AD83B00F48522 /* NobleSword-Beasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NobleSword-Beasts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22DE69B243AD83B00F48522 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A22DE69F243AD83B00F48522 /* CharecterActions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CharecterActions.sks; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			children = (
 				A2B75D1B243C41700098870E /* TitleScreen.sks */,
 				A2B75D25243C4C3A0098870E /* SpiritForest.sks */,
+				8E6141E3245A4B69009CD7C0 /* TestGrounds.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				A22DE6E2243B067E00F48522 /* Blue.sks in Resources */,
 				A2B75D2A243C526E0098870E /* jStick.png in Resources */,
 				A22DE6E0243B067E00F48522 /* Green.sks in Resources */,
+				8E6141E4245A4B69009CD7C0 /* TestGrounds.sks in Resources */,
 				A2B75D29243C526E0098870E /* jSubstrate.png in Resources */,
 				A22DE6E4243B067E00F48522 /* magic.sks in Resources */,
 				A22DE6D4243B044B00F48522 /* Intro.mov in Resources */,
