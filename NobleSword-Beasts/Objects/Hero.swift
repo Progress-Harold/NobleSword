@@ -107,7 +107,7 @@ class Hero {
     }
     
     func configureAttributes() {
-        
+        player.position = CGPoint(x: 0, y: 0)
         // Physics Body
         player.addChild(attackReferenceNode)
         

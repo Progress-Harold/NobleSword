@@ -69,7 +69,7 @@ class GameSceneTemplate: SKScene {
     var maxY: CGFloat = 207
     
     override func didMove(to view: SKView) {
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+//        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
 
         setUpControllerObservers()
         connectController()
@@ -101,6 +101,8 @@ class GameSceneTemplate: SKScene {
     
     func followPlayer() {
         guard let section = level.currentSection() else {
+            camera?.run(.move(to: self.hero.player.position, duration: 0.4))
+
             return
         }
         
@@ -171,9 +173,12 @@ class GameSceneTemplate: SKScene {
                 }
             }
         }
-        
-        for n in 1...counter {
-            setSection(number: n)
+
+
+        if counter != 0 {
+            for n in 1...counter {
+                setSection(number: n)
+            }
         }
     }
     
