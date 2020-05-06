@@ -44,9 +44,12 @@ class Enemy {
     var movementVar: Int = 100
     
     var spriteNode: SKSpriteNode = SKSpriteNode()
+    var attBox: SKSpriteNode?
     
     // MARK: Enemy Hp
     var enemyHp: Int = 3
+    
+    var attacking: Bool = false
     
     init(node: SKSpriteNode) {
             self.spriteNode = node
@@ -67,6 +70,29 @@ class Enemy {
             return SKAction.moveTo(y: currentPosition.y + CGFloat(movementVar), duration: 0.5)
         case .down:
             return SKAction.moveTo(y: currentPosition.y - CGFloat(movementVar), duration: 0.5)
+        }
+    }
+    
+    func attack() {
+
+        if !attacking {
+            attacking = true
+            let attNode = SKSpriteNode(color: .red, size: CGSize(width: 60, height: 30))
+            attBox = attNode
+            attNode.alpha = 0.4
+            attNode.zPosition = 10
+            
+            DispatchQueue.main.async {
+                self.spriteNode.addChild(attNode)
+                attNode.run(.moveTo(x: attNode.position.x + -60, duration: 1)) {
+                        attNode.removeFromParent()
+                        self.attBox = nil
+                        self.attacking = false
+                        self.attack()
+                    
+                }
+                
+            }
         }
     }
     

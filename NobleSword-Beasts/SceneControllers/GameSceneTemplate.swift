@@ -92,11 +92,23 @@ class GameSceneTemplate: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
- 
+ detectHits()
         if let currentSection = level.currentSection() {
                 checkTriggers(section: currentSection)
         }
         followPlayer()
+    }
+    
+    func detectHits() {
+        // MARK: Enemy hits player
+        for enemy in enemies {
+            if let enemyHitBox = enemy.attBox {
+                if enemyHitBox.contains(enemyHitBox.convert(hero.hitBox.position, from: hero.player)) {//contains(convert(hero.hitBox.position, to: enemyHitBox)) {
+                    print("attacked")
+                }
+            }
+        }
+        
     }
     
     func followPlayer() {
@@ -197,8 +209,11 @@ class GameSceneTemplate: SKScene {
             
             for e in eArr {
                 if let sprite =  e as? SKSpriteNode {
-                    enemies.append(Enemy(node: sprite))
+                    let enemy = Enemy(node: sprite)
+                    enemies.append(enemy)
+                    enemy.attack()
                 }
+                
             }
             
             if let env = sectionNode.childNode(withName: "environment") {
@@ -333,15 +348,29 @@ class GameSceneTemplate: SKScene {
     // Mark: Enemy
     
     func setupEnemy() {
-        for e in enemies {
-            e.randomDirection()
-            if let action = e.moveActionForCurrentDirection() {
-                e.spriteNode.run(action)
+        for node in children {
+            if (node.name == "enemy") {
+                if let enemy = node as? SKSpriteNode {
+                    enemies.append(Enemy(node: enemy))
+                }
             }
         }
+            
+            
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            if self.enemies.count != 0 {
+
+        
+        
+        for e in enemies {
+            e.attack()
+//            e.randomDirection()
+//            if let action = e.moveActionForCurrentDirection() {
+//                e.spriteNode.run(action)
+//            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            if self.enemies.count == 0 {
                 self.setupEnemy()
             }
         }

@@ -16,11 +16,12 @@ class Hero {
     var startPoint: CGPoint?
     var state: PlayerState = .idle
     
-    
     var lastDirection: PlayerDirection = .leftDirection
     
     var player: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R_idle"))
     let attackReferenceNode = SKNode()
+    
+    var hitBox: SKSpriteNode = SKSpriteNode()
     
     var hasKey: Bool = false
     var attatcking: Bool = false
@@ -110,6 +111,14 @@ class Hero {
         player.position = CGPoint(x: 0, y: 0)
         // Physics Body
         player.addChild(attackReferenceNode)
+        
+        let box = SKSpriteNode(color: .green, size: CGSize(width: 35, height: 60))
+        box.position = CGPoint(x: 0, y: 20)
+        box.zPosition = 30
+        box.alpha = 0.5
+        hitBox = box
+        
+        player.addChild(box)
         
         let colliderSize = CGSize(width: 34.246, height: 11.766)
         let collider = SKPhysicsBody(rectangleOf: colliderSize, center: CGPoint(x: 1.281, y: -32.273))
