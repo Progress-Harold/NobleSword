@@ -92,18 +92,25 @@ class GameSceneTemplate: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
- detectHits()
+        detectHits()
+        
+        if hero.hp <= 0 {
+            print("game over")
+        }
+        
         if let currentSection = level.currentSection() {
                 checkTriggers(section: currentSection)
         }
+        
         followPlayer()
     }
     
     func detectHits() {
         // MARK: Enemy hits player
         for enemy in enemies {
-            if let enemyHitBox = enemy.attBox {
-                if enemyHitBox.contains(enemyHitBox.convert(hero.hitBox.position, from: hero.player)) {//contains(convert(hero.hitBox.position, to: enemyHitBox)) {
+            if let enemyAttBox = enemy.attBox {
+                if enemyAttBox.contains(enemyAttBox.convert(hero.hitBox.position, from: hero.player)) {
+                    self.hero.hp -= 10
                     print("attacked")
                 }
             }
@@ -673,5 +680,4 @@ extension GameSceneTemplate: ControllerDelegate {
             self.CM.gameplayMode(nil, gamepad, element)
         }
     }
-
 }

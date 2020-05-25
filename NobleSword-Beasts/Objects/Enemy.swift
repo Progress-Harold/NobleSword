@@ -83,7 +83,6 @@ class Enemy {
     }
     
     func attack() {
-
         if !attacking {
             attacking = true
             let attNode = SKSpriteNode(color: .red, size: CGSize(width: 60, height: 30))

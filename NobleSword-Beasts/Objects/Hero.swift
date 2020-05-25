@@ -22,6 +22,7 @@ class Hero {
     let attackReferenceNode = SKNode()
     
     var hitBox: SKSpriteNode = SKSpriteNode()
+    var hp: Int = 50
     
     var hasKey: Bool = false
     var attatcking: Bool = false
