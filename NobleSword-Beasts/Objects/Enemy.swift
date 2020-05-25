@@ -48,12 +48,21 @@ class Enemy {
     
     // MARK: Enemy Hp
     var enemyHp: Int = 3
+    var hitBox: SKSpriteNode = SKSpriteNode()
     
     var attacking: Bool = false
     
     init(node: SKSpriteNode) {
             self.spriteNode = node
             self.currentPosition = node.position
+    }
+    
+    func setUp() {
+        
+        hitBox = SKSpriteNode(color: UIColor.red, size: CGSize(width: 50, height: 50))
+        hitBox.alpha = 0.5
+        
+        self.spriteNode.addChild(hitBox)
     }
     
     func moveActionForCurrentDirection() -> SKAction? {
