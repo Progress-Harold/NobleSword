@@ -22,6 +22,7 @@ class Hero {
     let attackReferenceNode = SKNode()
     
     var hitBox: SKSpriteNode = SKSpriteNode()
+    var attHitBox: SKSpriteNode = SKSpriteNode()
     var hp: Int = 50
     
     var hasKey: Bool = false
@@ -205,7 +206,9 @@ class Hero {
                 moveTo = -41.662
                 action = protectedAction(with: playerActions.Attacks.attackLeft)
             case .rightDirection:
-                attackCollider = SKPhysicsBody(rectangleOf: colliderSize, center: CGPoint(x: 38.752, y: yAxis))
+                let attCollider = SKSpriteNode(color: .red, size: colliderSize)
+                
+                attCollider.position = CGPoint(x: 38.752, y: yAxis)
                 moveTo = 45.752
                 action = protectedAction(with: playerActions.Attacks.attackRight)
             case .upDirection:

@@ -39,6 +39,7 @@ class GameSceneTemplate: SKScene {
     var hero: Hero = Hero()
     typealias playerMovement = AnimationsReference.PlayerActions.Movement
     
+    var attackCount: Int = 0
     
     var enemies: [Enemy] = []
     
@@ -71,8 +72,8 @@ class GameSceneTemplate: SKScene {
     override func didMove(to view: SKView) {
 //        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
 
-        setUpControllerObservers()
-        connectController()
+//        setUpControllerObservers()
+//        connectController()
         CM.delegate = self
         
         if let node = camera?.childNode(withName: "AttackButton") as? SKSpriteNode {
@@ -111,8 +112,27 @@ class GameSceneTemplate: SKScene {
             if let enemyAttBox = enemy.attBox {
                 if enemyAttBox.contains(enemyAttBox.convert(hero.hitBox.position, from: hero.player)) {
                     self.hero.hp -= 10
-                    print("attacked")
+//                    print("attacked")
                 }
+            }
+            
+            if enemy.hitBox.contains(enemy.hitBox.convert(hero.attHitBox.position, from: hero.player)) {
+                if !enemy.takingDamage {
+                    if attackCount < 1 {
+                        attackCount += 1
+                        enemy.takingDamage = true
+                        enemy.hp -= 10
+                        print("enemy hit")
+                        enemy.takingDamage = false
+                        if enemy.hp <= 0 {
+                            enemies.removeAll(where: { $0.spriteNode == enemy.spriteNode })
+                            enemy.spriteNode.removeFromParent()
+                        }
+                    }
+                    
+                    
+                }
+                
             }
         }
         
@@ -177,8 +197,23 @@ class GameSceneTemplate: SKScene {
     }
     
     func masaAttack() {
+        let attCollider = SKSpriteNode(color: .red, size: CGSize(width: 34.729, height: 46.733))
+
+        hero.attHitBox = attCollider
+        
         hero.player.run(protectedAction(with: "attackR")) {
             self.hero.player.removeAllActions()
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.hero.player.addChild(attCollider)
+            
+            attCollider.position = CGPoint(x: 38.752, y: -1.896)
+            attCollider.run(.moveTo(x: 85, duration: 0.3)) {
+                attCollider.removeFromParent()
+                self.attackCount -= 1
+            }
         }
     }
     
@@ -369,6 +404,7 @@ class GameSceneTemplate: SKScene {
         
         
         for e in enemies {
+            e.setUp()
             e.attack()
 //            e.randomDirection()
 //            if let action = e.moveActionForCurrentDirection() {
@@ -613,13 +649,13 @@ extension GameSceneTemplate: ControllerDelegate {
                     controller.extendedGamepad?.valueChangedHandler = nil
                     setUpExtendedController(controller: controller)
                 }
-                else if (controller.gamepad != nil && controller.playerIndex == .indexUnset) {
-                    controller.playerIndex = .index1
-                    
-                    
-                    controller.gamepad?.valueChangedHandler = nil
-                    
-                }
+//                else if (controller.gamepad != nil && controller.playerIndex == .indexUnset) {
+//                    controller.playerIndex = .index1
+//                    
+//                    
+//                    controller.gamepad?.valueChangedHandler = nil
+//                    
+//                }
                 else if (controller.microGamepad != nil && controller.playerIndex == .indexUnset) {
                     controller.playerIndex = .index1
                     
@@ -635,10 +671,10 @@ extension GameSceneTemplate: ControllerDelegate {
                 if (controller.extendedGamepad != nil) {
                     // ignore extended
                 }
-                else if (controller.gamepad != nil ) {
-                    // ignore standard
-                    
-                }
+//                else if (controller.gamepad != nil ) {
+//                    // ignore standard
+//
+//                }
                 else if (controller.microGamepad != nil && controller.playerIndex == .indexUnset) {
                     controller.playerIndex = .index1
                     

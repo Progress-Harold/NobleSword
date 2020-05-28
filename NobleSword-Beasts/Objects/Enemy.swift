@@ -47,10 +47,12 @@ class Enemy {
     var attBox: SKSpriteNode?
     
     // MARK: Enemy Hp
-    var enemyHp: Int = 3
+    var hp: Int = 30
     var hitBox: SKSpriteNode = SKSpriteNode()
     
     var attacking: Bool = false
+    var takingDamage: Bool = false
+
     
     init(node: SKSpriteNode) {
             self.spriteNode = node
@@ -59,7 +61,7 @@ class Enemy {
     
     func setUp() {
         
-        hitBox = SKSpriteNode(color: UIColor.red, size: CGSize(width: 50, height: 50))
+        hitBox = SKSpriteNode(color: .purple, size: CGSize(width: 50, height: 50))
         hitBox.alpha = 0.5
         
         self.spriteNode.addChild(hitBox)
@@ -93,13 +95,11 @@ class Enemy {
             DispatchQueue.main.async {
                 self.spriteNode.addChild(attNode)
                 attNode.run(.moveTo(x: attNode.position.x + -60, duration: 1)) {
-                        attNode.removeFromParent()
-                        self.attBox = nil
-                        self.attacking = false
-                        self.attack()
-                    
+                    attNode.removeFromParent()
+                    self.attBox = nil
+                    self.attacking = false
+                    self.attack()
                 }
-                
             }
         }
     }
