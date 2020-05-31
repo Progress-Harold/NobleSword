@@ -23,13 +23,14 @@ class Hero {
     
     var hitBox: SKSpriteNode = SKSpriteNode()
     var attHitBox: SKSpriteNode = SKSpriteNode()
-    var hp: Int = 50
+    var hp: Int = 200
     
     var hasKey: Bool = false
     var attatcking: Bool = false
     var testAttatcksOn: Bool = true
     
     var animCounter: Int = 0
+    var attackCount: Int = 0
     var sp: Int = 10
     var spiritIsFull: Bool {
         return sp == 10
@@ -188,6 +189,7 @@ class Hero {
     
     
     func attack() {
+        testAttatcksOn = false
         if !testAttatcksOn {
             attackReferenceNode.removeAllChildren()
             let attackNode = SKNode()
@@ -206,11 +208,29 @@ class Hero {
                 moveTo = -41.662
                 action = protectedAction(with: playerActions.Attacks.attackLeft)
             case .rightDirection:
-                let attCollider = SKSpriteNode(color: .red, size: colliderSize)
+                let attCollider = SKSpriteNode(color: .red, size: CGSize(width: 34.729, height: 46.733))
+
+                attHitBox = attCollider
                 
-                attCollider.position = CGPoint(x: 38.752, y: yAxis)
-                moveTo = 45.752
-                action = protectedAction(with: playerActions.Attacks.attackRight)
+                player.run(protectedAction(with: "attackR")) {
+                    self.player.removeAllActions()
+                }
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    self.player.addChild(attCollider)
+                    
+                    attCollider.position = CGPoint(x: 38.752, y: -1.896)
+                    attCollider.run(.moveTo(x: 85, duration: 0.3)) {
+                        attCollider.removeFromParent()
+                        self.attackCount -= 1
+                    }
+                }
+//                let attCollider = SKSpriteNode(color: .red, size: colliderSize)
+//
+//                attCollider.position = CGPoint(x: 38.752, y: yAxis)
+//                moveTo = 45.752
+//                action = protectedAction(with: playerActions.Attacks.attackRight)
             case .upDirection:
                 colliderSize = CGSize(width: 46.733, height: 34.729)
                 attackCollider = SKPhysicsBody(rectangleOf: colliderSize, center: CGPoint(x: xAxis, y: 53.728))
@@ -223,41 +243,41 @@ class Hero {
                 action = protectedAction(with: playerActions.Attacks.attackDown)
             }
             
-            basicCollider(for: attackCollider)
-            attackNode.physicsBody = attackCollider
-            attackReferenceNode.addChild(attackNode)
-            player.run(action)
-            if lastDirection == .leftDirection || lastDirection == .rightDirection {
-                attackNode.run(.moveTo(x: moveTo, duration: 0.2)) {
-                    attackNode.removeFromParent()
-                }
-            }
-            else {
-                attackNode.run(.moveTo(y: moveTo, duration: 0.2)) {
-                    attackNode.removeFromParent()
-                }
-            }
+//            basicCollider(for: attackCollider)
+//            attackNode.physicsBody = attackCollider
+//            attackReferenceNode.addChild(attackNode)
+//            player.run(action)
+//            if lastDirection == .leftDirection || lastDirection == .rightDirection {
+//                attackNode.run(.moveTo(x: moveTo, duration: 0.2)) {
+//                    attackNode.removeFromParent()
+//                }
+//            }
+//            else {
+//                attackNode.run(.moveTo(y: moveTo, duration: 0.2)) {
+//                    attackNode.removeFromParent()
+//                }
+//            }
         }
-        else {
-            var texture: SKTexture = SKTexture()
-            
-            // Testing attatcks
-            switch lastDirection {
-            case .leftDirection:
-                texture = SKTexture(image: #imageLiteral(resourceName: "PlayerTestL"))
-            case .rightDirection:
-                texture = SKTexture(image: #imageLiteral(resourceName: "PlayerTestR"))
-            default:
-                texture = SKTexture(image: #imageLiteral(resourceName: "PlayerTestR"))
-            }
-            
-            let action = SKAction.animate(with: [texture, SKTexture(image: lastDirection.image)], timePerFrame: 0.1, resize: true, restore: true)
-            
-            let loop = SKAction.repeat(action, count: 1)
-//            let seq = SKAction.sequence([action])
-            basicAttack()
-            player.run(loop)
-        }
+//        else {
+//            var texture: SKTexture = SKTexture()
+//
+//            // Testing attatcks
+//            switch lastDirection {
+//            case .leftDirection:
+//                texture = SKTexture(image: #imageLiteral(resourceName: "PlayerTestL"))
+//            case .rightDirection:
+//                texture = SKTexture(image: #imageLiteral(resourceName: "PlayerTestR"))
+//            default:
+//                texture = SKTexture(image: #imageLiteral(resourceName: "PlayerTestR"))
+//            }
+//
+//            let action = SKAction.animate(with: [texture, SKTexture(image: lastDirection.image)], timePerFrame: 0.1, resize: true, restore: true)
+//
+//            let loop = SKAction.repeat(action, count: 1)
+////            let seq = SKAction.sequence([action])
+//            basicAttack()
+//            player.run(loop)
+//        }
     }
     
     
