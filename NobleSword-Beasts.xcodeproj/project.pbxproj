@@ -42,6 +42,8 @@
 		A2B75D29243C526E0098870E /* jSubstrate.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D27243C526E0098870E /* jSubstrate.png */; };
 		A2B75D2A243C526E0098870E /* jStick.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B75D28243C526E0098870E /* jStick.png */; };
 		A2D2B95A2454FD940097C899 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2B9592454FD930097C899 /* Enemy.swift */; };
+		A2E3B5532482F4B300E1EB82 /* TitleFlies.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2E3B5512482F4B300E1EB82 /* TitleFlies.sks */; };
+		A2E3B5542482F4B300E1EB82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2E3B5522482F4B300E1EB82 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +106,8 @@
 		A2B75D27243C526E0098870E /* jSubstrate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jSubstrate.png; sourceTree = "<group>"; };
 		A2B75D28243C526E0098870E /* jStick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jStick.png; sourceTree = "<group>"; };
 		A2D2B9592454FD930097C899 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		A2E3B5512482F4B300E1EB82 /* TitleFlies.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleFlies.sks; sourceTree = "<group>"; };
+		A2E3B5522482F4B300E1EB82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +226,8 @@
 				A22DE6DD243B067E00F48522 /* magic.sks */,
 				A22DE6D8243B067D00F48522 /* Red.sks */,
 				A22DE6D7243B067D00F48522 /* Title.sks */,
+				A2E3B5512482F4B300E1EB82 /* TitleFlies.sks */,
+				A2E3B5522482F4B300E1EB82 /* Assets.xcassets */,
 			);
 			path = Particles;
 			sourceTree = "<group>";
@@ -401,12 +407,14 @@
 				A2B75D1C243C41700098870E /* TitleScreen.sks in Resources */,
 				A2B75D26243C4C3A0098870E /* SpiritForest.sks in Resources */,
 				A22DE6D5243B044B00F48522 /* Prelude.mov in Resources */,
+				A2E3B5542482F4B300E1EB82 /* Assets.xcassets in Resources */,
 				A22DE6A7243AD83B00F48522 /* Main.storyboard in Resources */,
 				A2B1F3BD2455304B0010C43D /* EnvironmentActions.sks in Resources */,
 				A22DE6DE243B067E00F48522 /* Title.sks in Resources */,
 				A22DE6E2243B067E00F48522 /* Blue.sks in Resources */,
 				A2B75D2A243C526E0098870E /* jStick.png in Resources */,
 				A22DE6E0243B067E00F48522 /* Green.sks in Resources */,
+				A2E3B5532482F4B300E1EB82 /* TitleFlies.sks in Resources */,
 				8E6141E4245A4B69009CD7C0 /* TestGrounds.sks in Resources */,
 				A2B75D29243C526E0098870E /* jSubstrate.png in Resources */,
 				A22DE6E4243B067E00F48522 /* magic.sks in Resources */,

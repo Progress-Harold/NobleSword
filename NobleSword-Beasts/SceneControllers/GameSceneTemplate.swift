@@ -109,17 +109,26 @@ class GameSceneTemplate: SKScene {
     func detectHits() {
         // MARK: Enemy hits player
         for enemy in enemies {
+            enemy.detectPlayer(player: hero.player)
+            
+            if enemy.currentState == .persuit {
+                enemy.spriteNode.run(.move(to: self.hero.player.position, duration: 3))
+            }
+            else if !enemy.idleIndling, enemy.currentState == .idle {
+                enemy.idleAnimation()
+            }
+            
             if let enemyAttBox = enemy.attBox {
-                if enemyAttBox.contains(enemyAttBox.convert(hero.hitBox.position, from: hero.player)) {
+                if hero.hitBox.contains(hero.hitBox.convert(enemyAttBox.position, from: enemy.spriteNode)) {
                     self.hero.hp -= 10
-//                    print("attacked")
+                    print("attacked")
                 }
             }
             
             if enemy.hitBox.contains(enemy.hitBox.convert(hero.attHitBox.position, from: hero.player)) {
                 if !enemy.takingDamage {
-                    if attackCount < 1 {
-                        attackCount += 1
+                    if self.hero.attackCount < 1 {
+                        self.hero.attackCount += 1
                         enemy.takingDamage = true
                         enemy.hp -= 10
                         print("enemy hit")
@@ -129,13 +138,9 @@ class GameSceneTemplate: SKScene {
                             enemy.spriteNode.removeFromParent()
                         }
                     }
-                    
-                    
                 }
-                
             }
         }
-        
     }
     
     func followPlayer() {
@@ -437,7 +442,7 @@ class GameSceneTemplate: SKScene {
     
     func touchDown(atPoint pos : CGPoint) {
         if attackButton.contains(convert(pos, to: camera!)) {
-            masaAttack()
+            self.hero.attack()
         }
     }
     
@@ -520,7 +525,7 @@ extension GameSceneTemplate {
 
 extension GameSceneTemplate: ControllerDelegate {
     func moveUp() {
-        print("up")
+//        print("up")
         if self.hero.lastDirection != .upDirection  {
             self.walkingStarted = false
             self.hero.player.removeAllActions()
@@ -539,7 +544,7 @@ extension GameSceneTemplate: ControllerDelegate {
     }
     
     func moveDown() {
-        print("down")
+//        print("down")
         if self.hero.lastDirection != .downDirection {
             self.hero.player.removeAllActions()
             
@@ -558,7 +563,7 @@ extension GameSceneTemplate: ControllerDelegate {
     }
     
     func moveLeft() {
-        print("left")
+//        print("left")
         if self.hero.lastDirection != .leftDirection {
             self.walkingStarted = false
             self.hero.player.removeAllActions()
@@ -577,7 +582,7 @@ extension GameSceneTemplate: ControllerDelegate {
     }
     
     func moveRight() {
-        print("right")
+//        print("right")
         if self.hero.lastDirection != .rightDirection {
             self.walkingStarted = false
             self.hero.player.removeAllActions()
