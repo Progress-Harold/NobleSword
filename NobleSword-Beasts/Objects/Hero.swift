@@ -28,6 +28,7 @@ class Hero {
     var hasKey: Bool = false
     var attatcking: Bool = false
     var testAttatcksOn: Bool = true
+    var walkingStarted = false
     
     var animCounter: Int = 0
     var attackCount: Int = 0
@@ -118,7 +119,7 @@ class Hero {
         let box = SKSpriteNode(color: .green, size: CGSize(width: 35, height: 60))
         box.position = CGPoint(x: 0, y: 20)
         box.zPosition = 30
-        box.alpha = 0.5
+        box.alpha = 0
         hitBox = box
         
         player.addChild(box)

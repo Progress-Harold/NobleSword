@@ -72,15 +72,23 @@ class Enemy {
     
     func setUp() {
 
-        fieldOfView.alpha = 0.5
-        strikingDistance.alpha = 0.5
+        fieldOfView.alpha = 0
+        strikingDistance.alpha = 0
         spriteNode.addChild(fieldOfView)
         spriteNode.addChild(strikingDistance)
         
         hitBox = SKSpriteNode(color: .purple, size: CGSize(width: 50, height: 50))
-        hitBox.alpha = 0.5
+        hitBox.alpha = 0
         
         self.spriteNode.addChild(hitBox)
+        
+        //Attack Node
+        let attNode = SKSpriteNode(color: .red, size: CGSize(width: 60, height: 52))
+        attNode.position = CGPoint(x: 40, y: -30)
+        attBox = attNode
+        attNode.alpha = 0
+        attNode.zPosition = 10
+        self.spriteNode.addChild(attNode)
     }
     
     func moveActionForCurrentDirection() -> SKAction? {
@@ -101,70 +109,57 @@ class Enemy {
     }
     
     func attack() {
-        if !attacking {
-            attacking = true
-            let attNode = SKSpriteNode(color: .red, size: CGSize(width: 60, height: 30))
-            attBox = attNode
-            attNode.alpha = 0.4
-            attNode.zPosition = 10
-            
-            DispatchQueue.main.async {
-                self.spriteNode.addChild(attNode)
-                attNode.run(.moveTo(x: attNode.position.x + -60, duration: 1)) {
-                    attNode.removeFromParent()
-                    self.attBox = nil
-                    self.attacking = false
-                    self.attack()
-                }
-            }
-        }
+//        let attNode = SKSpriteNode(color: .red, size: CGSize(width: 60, height: 52))
+//        attNode.position = CGPoint(x: 40, y: -30)
+//        attBox = attNode
+//        attNode.alpha = 0.4
+//        attNode.zPosition = 10
+//        self.spriteNode.addChild(attNode)
     }
     
     func idleAnimation() {
         if idleIndling != true {
             if currentState == .idle {
                 idleIndling = true
-                // animate moving left
                 if (self.currentState != .idle) {
                     self.idleIndling = false
                     return }
                 
-                self.spriteNode.run(.moveTo(x: -100, duration: 0.9)) {
-                    // animate moving right
+                runAnimation(direction: .left)
+                self.spriteNode.run(.moveTo(x: -100, duration: 1.5)) {
+                    // animate moving left
                     if (self.currentState != .idle) {
                         self.idleIndling = false
                         return }
                     
-                    self.spriteNode.run(.moveTo(x: 100, duration: 0.9)) {
-                        // animate moving up
+                    self.runAnimation(direction: .right)
+                    self.spriteNode.run(.moveTo(x: 100, duration: 1.5)) {
+                        // animate moving right
                         if (self.currentState != .idle) {
                             self.idleIndling = false
                         return
                         }
-                        self.spriteNode.run(.moveTo(y: 100, duration: 0.9)) {
-                            // animate moving down
-                            if (self.currentState != .idle) {
-                                self.idleIndling = false
-                                return }
-                            self.spriteNode.run(.moveTo(y: -100, duration: 0.9)) {
-                                self.idleIndling = false
-                                self.idleAnimation()
-                            }
-                        }
+                        self.idleIndling = false
+                        self.idleAnimation()
                     }
                 }
             }
         }
     }
-    
+
     func detectPlayer(player: SKSpriteNode) {
+        let direction: Direction = calculateDirection(player: player)
+        
         if fieldOfView.contains(spriteNode.convert(player.position, from: player.parent!)) {
             if currentState != .persuit {
                 currentState = .persuit
-                let action = protectedAction(with: "sfEnemy1RIdle")
-                
-                spriteNode.run(action)
+                self.runAnimation(direction: direction)
                 print("Player is within in sight")
+            }
+            
+            if currentDircetion != direction {
+                currentDircetion = direction
+                self.runAnimation(direction: direction)
             }
         }
         else if strikingDistance.contains(spriteNode.convert(player.position, from: player.parent!)) {
@@ -176,7 +171,25 @@ class Enemy {
         }
     }
     
+    func runAnimation(direction: Direction) {
+        let action: SKAction = (direction == .right) ? protectedAction(with: "sfEnemy1RIdle") : protectedAction(with: "sfEnemy1LIdle")
+        
+        self.attBox?.position = (direction == .left) ? CGPoint(x: -35, y: -30) : CGPoint(x: 40, y: -30)
+        DispatchQueue.main.async {
+            self.spriteNode.run(action)
+        }
+    }
     
+    func calculateDirection(player: SKSpriteNode) -> Direction {
+        if let parent = spriteNode.parent, let playerParent = player.parent {
+            if parent.convert(player.position, from: playerParent).x < spriteNode.position.x {
+                return .left
+            }
+        }
+        
+        
+        return .right
+    }
     
     
     
@@ -186,3 +199,5 @@ class Enemy {
         currentDircetion = posibleDirections[Int(randomIndex)]
     }
 }
+
+

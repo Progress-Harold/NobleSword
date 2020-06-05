@@ -44,8 +44,6 @@ class GameSceneTemplate: SKScene {
     var enemies: [Enemy] = []
     
     // Tests
-//    let s: SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Masa_R"), size: CGSize(width: 320, height: 320))
-    var walkingStarted = false
     var lastDirection = ""
     var purpleEmitter: SKEmitterNode = SKEmitterNode()
     var trap: SKSpriteNode = SKSpriteNode()
@@ -491,7 +489,7 @@ class GameSceneTemplate: SKScene {
         
         moveJoystick.on(.end) { [unowned self] _ in
             self.hero.player.removeAllActions()
-            self.walkingStarted = false
+            self.hero.walkingStarted = false
         }
         
         
@@ -527,15 +525,15 @@ extension GameSceneTemplate: ControllerDelegate {
     func moveUp() {
 //        print("up")
         if self.hero.lastDirection != .upDirection  {
-            self.walkingStarted = false
+            self.hero.walkingStarted = false
             self.hero.player.removeAllActions()
             
         }
         
         self.hero.lastDirection = .upDirection
         self.hero.player.position = CGPoint(x: self.hero.player.position.x, y: self.hero.player.position.y + 2)
-        if !self.walkingStarted {
-            self.walkingStarted = true
+        if !self.hero.walkingStarted {
+            self.hero.walkingStarted = true
             
             DispatchQueue.main.async {
                 self.hero.player.run(protectedAction(with: playerMovement.moveUp))
@@ -548,13 +546,13 @@ extension GameSceneTemplate: ControllerDelegate {
         if self.hero.lastDirection != .downDirection {
             self.hero.player.removeAllActions()
             
-            self.walkingStarted = false
+            self.hero.walkingStarted = false
         }
         
         self.hero.lastDirection = .downDirection
         self.hero.player.position = CGPoint(x: self.hero.player.position.x, y: self.hero.player.position.y - 2)
-        if !self.walkingStarted {
-            self.walkingStarted = true
+        if !self.hero.walkingStarted {
+            self.hero.walkingStarted = true
             
             DispatchQueue.main.async {
                 self.hero.player.run(protectedAction(with: playerMovement.moveDown))
@@ -565,15 +563,15 @@ extension GameSceneTemplate: ControllerDelegate {
     func moveLeft() {
 //        print("left")
         if self.hero.lastDirection != .leftDirection {
-            self.walkingStarted = false
+            self.hero.walkingStarted = false
             self.hero.player.removeAllActions()
             
         }
         
         self.hero.lastDirection = .leftDirection
         self.hero.player.position = CGPoint(x: self.hero.player.position.x - 2, y: self.hero.player.position.y)
-        if !self.walkingStarted {
-            self.walkingStarted = true
+        if !self.hero.walkingStarted {
+            self.hero.walkingStarted = true
             
             DispatchQueue.main.async {
                 self.hero.player.run(protectedAction(with: playerMovement.moveLeft))
@@ -584,15 +582,15 @@ extension GameSceneTemplate: ControllerDelegate {
     func moveRight() {
 //        print("right")
         if self.hero.lastDirection != .rightDirection {
-            self.walkingStarted = false
+            self.hero.walkingStarted = false
             self.hero.player.removeAllActions()
         }
         
         self.hero.lastDirection = .rightDirection
         self.hero.player.position = CGPoint(x: self.hero.player.position.x + 2, y: self.hero.player.position.y)
         
-        if !self.walkingStarted {
-            self.walkingStarted = true
+        if !self.hero.walkingStarted {
+            self.hero.walkingStarted = true
             
             DispatchQueue.main.async {
                 self.hero.player.run(protectedAction(with: playerMovement.moveRight))

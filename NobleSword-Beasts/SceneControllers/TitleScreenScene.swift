@@ -87,15 +87,10 @@ class TitleScreenScene: SKScene {
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let scene = IntroScene(fileNamed: "Intro") else {
-//            return
-//        }
-        
         if let scene = GameSceneTemplate(fileNamed: "SpiritForest") {
-                        scene.scaleMode = .aspectFit
-        
-                        self.view?.presentScene(scene, transition: SKTransition.fade(withDuration: 0.4))
-                    }
+            
+            self.view?.presentScene(scene, transition: SKTransition.fade(withDuration: 0.4))
+        }
         
         if currentState == .cutScene,
             !skipButtonPresented {
