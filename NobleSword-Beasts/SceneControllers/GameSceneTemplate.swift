@@ -68,10 +68,6 @@ class GameSceneTemplate: SKScene {
     var maxY: CGFloat = 207
     
     override func didMove(to view: SKView) {
-//        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-
-//        setUpControllerObservers()
-//        connectController()
         CM.delegate = self
         
         if let node = camera?.childNode(withName: "AttackButton") as? SKSpriteNode {
@@ -94,7 +90,7 @@ class GameSceneTemplate: SKScene {
         detectHits()
         
         if hero.hp <= 0 {
-            print("game over")
+            print("GameOver")
         }
         
         if let currentSection = level.currentSection() {
