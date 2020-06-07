@@ -88,6 +88,7 @@ class TitleScreenScene: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let scene = GameSceneTemplate(fileNamed: "SpiritForest") {
+            scene.scaleMode = .aspectFill
             
             self.view?.presentScene(scene, transition: SKTransition.fade(withDuration: 0.4))
         }
