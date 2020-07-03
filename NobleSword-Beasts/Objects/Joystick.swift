@@ -41,7 +41,6 @@ open class TLAnalogJoystickHiddenArea: SKShapeNode {
         get {
             return currJoystick
         }
-        
         set {
             if let currJoystick = self.currJoystick {
                 removeChildren(in: [currJoystick])
@@ -125,9 +124,9 @@ open class TLAnalogJoystickComponent: SKSpriteNode {
         get {
             return super.size
         }
-        
         set {
             let maxVal = max(newValue.width, newValue.height)
+            
             super.size.width = maxVal
             super.size.height = maxVal
         }
@@ -147,6 +146,7 @@ open class TLAnalogJoystickComponent: SKSpriteNode {
     init(diameter: CGFloat, color: UIColor? = nil, image: UIImage? = nil) {
         let pureColor = color ?? UIColor.black
         let size = CGSize(width: diameter, height: diameter)
+        
         super.init(texture: nil, color: pureColor, size: size)
         
         self.diameter = diameter

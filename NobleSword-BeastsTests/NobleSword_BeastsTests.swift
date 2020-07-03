@@ -7,28 +7,50 @@
 //
 
 import XCTest
+import SpriteKit
 @testable import NobleSword_Beasts
 
 class NobleSword_BeastsTests: XCTestCase {
 
+    var numberOfSensors: Int = 0
+    var depthSensingStruct: SceneDepthSensorStructure?
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.depthSensingStruct = SceneDepthSensorStructure()
+        self.numberOfSensors = 29
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.depthSensingStruct = nil
+        self.numberOfSensors = 0
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testBuildingAStructure() {
+        buildTestStructure()
+        
+        XCTAssertTrue((depthSensingStruct?.sensors.count == numberOfSensors))
+        
+        depthSensingStruct?.sensors.removeAll()
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    func testNoneBuiltStructures() {
+        XCTAssertNotNil(depthSensingStruct)
 
+        XCTAssertTrue(depthSensingStruct!.sensors.isEmpty)
+    }
+    
+    func testBuiltStructures() {
+        buildTestStructure()
+        
+        XCTAssertTrue(!depthSensingStruct!.sensors.isEmpty)
+    }
+    
+    func buildTestStructure() {
+        // Check if the depthSensingStruct
+        XCTAssertNotNil(depthSensingStruct)
+        
+        depthSensingStruct?.buildSensors(to: SKNode(), numberOfSensors: numberOfSensors)
+    }
 }
