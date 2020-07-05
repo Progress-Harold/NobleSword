@@ -34,10 +34,12 @@ class Sensor: SKSpriteNode {
 }
 
 struct SceneDepthSensorStructure {
+    /// Parent node to all sensors.
+    var mainNode: SKNode = SKNode()
     var sensors = [Sensor]()
     
     mutating func buildSensors(to parent: SKNode, numberOfSensors: Int) {
-        // There should be usually 29 sensors in Noble Sword.
+        // There should be usually 11 sensors in Noble Sword.
         for sensorNumber in 1...numberOfSensors {
             sensors.append(Sensor(layer: sensorNumber))
         }

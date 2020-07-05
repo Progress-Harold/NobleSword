@@ -1,5 +1,5 @@
 //
-//  NobleSword_BeastsTests.swift
+//  SceneDepthSensorTests.swift
 //  NobleSword-BeastsTests
 //
 //  Created by Lee Davis on 4/5/20.
@@ -10,7 +10,7 @@ import XCTest
 import SpriteKit
 @testable import NobleSword_Beasts
 
-class NobleSword_BeastsTests: XCTestCase {
+class SceneDepthSensorTests: XCTestCase {
 
     var numberOfSensors: Int = 0
     var depthSensingStruct: SceneDepthSensorStructure?
