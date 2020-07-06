@@ -26,9 +26,9 @@ class GameSceneTemplate: SKScene {
     var level: Level = Level()
     var changingSections: Bool = false
     
-    /// A Space is an area in a section
-    var currentSpace: Space = .two
-
+    /// Tracks the type of warp the player performed.
+    var lastWarp: Warp = .entry
+    
     var CM = ControlManager.shared
     let moveJoystick = js(withDiameter: 100)
     var joystickView = SKSpriteNode()
@@ -187,13 +187,13 @@ class GameSceneTemplate: SKScene {
         }
     }
     
-    func setCameraPos() {
-//        guard let section = level.currentSection() else {
-//            return
-//        }
-//
-//        camera?.run(.move(to: convert((section.camPosition?.getPos(space: currentSpace))!, from: section.mainNode), duration: 0.8))
-    }
+//    func setCameraPos() {
+////        guard let section = level.currentSection() else {
+////            return
+////        }
+////
+////        camera?.run(.move(to: convert((CGPoint(x: 0, y: 0)), from: section.mainNode), duration: 0.8))
+//    }
     
     func masaAttack() {
         let attCollider = SKSpriteNode(color: .red, size: CGSize(width: 34.729, height: 46.733))
@@ -254,7 +254,6 @@ class GameSceneTemplate: SKScene {
                     enemies.append(enemy)
                     enemy.attack()
                 }
-                
             }
             
             if let env = sectionNode.childNode(withName: "environment") {
@@ -267,16 +266,6 @@ class GameSceneTemplate: SKScene {
                     }
                     
                 }
-            }
-            
-            if let node = sectionNode.childNode(withName: "space1") as? SKSpriteNode {
-                section.spaces[.one] = node
-            }
-            if let node = sectionNode.childNode(withName: "space2") as? SKSpriteNode {
-                section.spaces[.two] = node
-            }
-            if let node = sectionNode.childNode(withName: "space3") as? SKSpriteNode {
-                section.spaces[.three] = node
             }
             if let warpOne = sectionNode.childNode(withName: "entry") as? SKSpriteNode  {
                 section.entry = warpOne
@@ -321,7 +310,7 @@ class GameSceneTemplate: SKScene {
                     
                     self.hero.player.run(animDown)
                     self.hero.player.run(animMove) {
-                        self.setCameraPos()
+//                        self.setCameraPos()
                         self.hero.player.removeAllActions()
                         self.changingSections = false
                     }     
@@ -337,7 +326,7 @@ class GameSceneTemplate: SKScene {
                     
                     self.hero.player.run(animDown)
                     self.hero.player.run(animMove) {
-                        self.setCameraPos()
+//                        self.setCameraPos()
                         self.hero.player.removeAllActions()
                         self.changingSections = false
                     }
@@ -356,11 +345,6 @@ class GameSceneTemplate: SKScene {
     }
     
     func checkTriggers(section: Section) {
-        for (space, node) in section.spaces {
-            if node.contains(convert(hero.player.position, to: section.mainNode)) {
-                self.currentSpace = space
-            }
-        }
         if let exit = section.exit {
             if !changingSections {
                 if exit.contains(convert(hero.player.position, to: section.mainNode)) {
@@ -396,11 +380,6 @@ class GameSceneTemplate: SKScene {
                 }
             }
         }
-            
-            
-        
-
-        
         
         for e in enemies {
             e.setUp()
@@ -427,7 +406,7 @@ class GameSceneTemplate: SKScene {
         hero.player.zPosition = 5
         if let camera = self.childNode(withName: "camera") as? SKCameraNode {
             self.camera = camera
-            setCameraPos()
+//            setCameraPos()
             
             self.hero.player.zPosition = 5
             self.addChild(self.hero.player)

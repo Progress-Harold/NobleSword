@@ -15,7 +15,7 @@
 		A22DE6A7243AD83B00F48522 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6A5243AD83B00F48522 /* Main.storyboard */; };
 		A22DE6A9243AD83D00F48522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6A8243AD83D00F48522 /* Assets.xcassets */; };
 		A22DE6AC243AD83D00F48522 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6AA243AD83D00F48522 /* LaunchScreen.storyboard */; };
-		A22DE6B7243AD83D00F48522 /* NobleSword_BeastsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6B6243AD83D00F48522 /* NobleSword_BeastsTests.swift */; };
+		A22DE6B7243AD83D00F48522 /* SceneDepthSensorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6B6243AD83D00F48522 /* SceneDepthSensorTests.swift */; };
 		A22DE6C2243AD83D00F48522 /* NobleSword_BeastsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6C1243AD83D00F48522 /* NobleSword_BeastsUITests.swift */; };
 		A22DE6D1243B011900F48522 /* TitleScreenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22DE6D0243B011900F48522 /* TitleScreenScene.swift */; };
 		A22DE6D4243B044B00F48522 /* Intro.mov in Resources */ = {isa = PBXBuildFile; fileRef = A22DE6D2243B044900F48522 /* Intro.mov */; };
@@ -44,6 +44,8 @@
 		A2D2B95A2454FD940097C899 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2B9592454FD930097C899 /* Enemy.swift */; };
 		A2E3B5532482F4B300E1EB82 /* TitleFlies.sks in Resources */ = {isa = PBXBuildFile; fileRef = A2E3B5512482F4B300E1EB82 /* TitleFlies.sks */; };
 		A2E3B5542482F4B300E1EB82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2E3B5522482F4B300E1EB82 /* Assets.xcassets */; };
+		A2EA8858248D97D000F8381C /* DepthSensorStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8857248D97D000F8381C /* DepthSensorStructure.swift */; };
+		A2EA885A248D98C300F8381C /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8859248D98C300F8381C /* Debugger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +77,7 @@
 		A22DE6AB243AD83D00F48522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A22DE6AD243AD83D00F48522 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A22DE6B2243AD83D00F48522 /* NobleSword-BeastsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NobleSword-BeastsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A22DE6B6243AD83D00F48522 /* NobleSword_BeastsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobleSword_BeastsTests.swift; sourceTree = "<group>"; };
+		A22DE6B6243AD83D00F48522 /* SceneDepthSensorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDepthSensorTests.swift; sourceTree = "<group>"; };
 		A22DE6B8243AD83D00F48522 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A22DE6BD243AD83D00F48522 /* NobleSword-BeastsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NobleSword-BeastsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A22DE6C1243AD83D00F48522 /* NobleSword_BeastsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobleSword_BeastsUITests.swift; sourceTree = "<group>"; };
@@ -108,6 +110,8 @@
 		A2D2B9592454FD930097C899 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		A2E3B5512482F4B300E1EB82 /* TitleFlies.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleFlies.sks; sourceTree = "<group>"; };
 		A2E3B5522482F4B300E1EB82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A2EA8857248D97D000F8381C /* DepthSensorStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthSensorStructure.swift; sourceTree = "<group>"; };
+		A2EA8859248D98C300F8381C /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +182,7 @@
 		A22DE6B5243AD83D00F48522 /* NobleSword-BeastsTests */ = {
 			isa = PBXGroup;
 			children = (
-				A22DE6B6243AD83D00F48522 /* NobleSword_BeastsTests.swift */,
+				A22DE6B6243AD83D00F48522 /* SceneDepthSensorTests.swift */,
 				A22DE6B8243AD83D00F48522 /* Info.plist */,
 			);
 			path = "NobleSword-BeastsTests";
@@ -203,6 +207,7 @@
 				A2B75D28243C526E0098870E /* jStick.png */,
 				A2B75D27243C526E0098870E /* jSubstrate.png */,
 				A22DE6AA243AD83D00F48522 /* LaunchScreen.storyboard */,
+				A2EA8859248D98C300F8381C /* Debugger.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 		A29BCBC8244C3A0100A7B000 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				A2EA8856248D97A700F8381C /* Structures */,
 				A2B75D1D243C45FB0098870E /* Hero.swift */,
 				A2B75D1F243C46330098870E /* Tools.swift */,
 				A2B75D23243C48E20098870E /* Joystick.swift */,
@@ -297,6 +303,14 @@
 				A2B1F3C3245919C00010C43D /* ExternalAccessory.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A2EA8856248D97A700F8381C /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				A2EA8857248D97D000F8381C /* DepthSensorStructure.swift */,
+			);
+			path = Structures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,9 +466,11 @@
 				A2B75D22243C470F0098870E /* AnimationsReference.swift in Sources */,
 				A2B75D24243C48E20098870E /* Joystick.swift in Sources */,
 				A2D2B95A2454FD940097C899 /* Enemy.swift in Sources */,
+				A2EA8858248D97D000F8381C /* DepthSensorStructure.swift in Sources */,
 				A2B75D1E243C45FB0098870E /* Hero.swift in Sources */,
 				A22DE6A2243AD83B00F48522 /* GameSceneTemplate.swift in Sources */,
 				A22DE6D1243B011900F48522 /* TitleScreenScene.swift in Sources */,
+				A2EA885A248D98C300F8381C /* Debugger.swift in Sources */,
 				A2B75D20243C46330098870E /* Tools.swift in Sources */,
 				A22DE6A4243AD83B00F48522 /* GameViewController.swift in Sources */,
 				A2573E74244D4F3B00801A72 /* Level.swift in Sources */,
@@ -467,7 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A22DE6B7243AD83D00F48522 /* NobleSword_BeastsTests.swift in Sources */,
+				A22DE6B7243AD83D00F48522 /* SceneDepthSensorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
