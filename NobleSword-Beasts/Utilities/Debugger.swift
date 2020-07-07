@@ -9,5 +9,5 @@
 import Foundation
 
 struct Debugger {
-    static var debugModeActive: Bool = false
+    static var debugModeActive: Bool = true
 }
