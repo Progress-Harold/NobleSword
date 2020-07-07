@@ -19,11 +19,26 @@ class Sensor: SKSpriteNode {
         return Debugger.debugModeActive
     }
     
-    convenience init(layer: Int) {
+    var xPOS: Int = -10
+    
+    var calculatedYPosition: Int {
+        let maxYPos: Int = 530
+        if zLayer > 1 {
+            let varient: Int = 100 * zLayer
+            return (maxYPos - varient)
+        }
+        else {
+            return maxYPos
+        }
+    }
+    
+    convenience init(layer: Int, xposition: Int? = nil) {
         self.init()
         self.zLayer = layer * -100
-        self.alpha = debugModeActive ? 1 : 0
-        self.size = CGSize(width: 245, height: 70)
+        self.alpha = 1//debugModeActive ? 1 : 0
+        self.size = CGSize(width: 1500, height: 100)
+        self.position = CGPoint(x: xposition ?? xPOS, y: calculatedYPosition)
+        self.color = .cyan
     }
     
     func sense(for intity: SKSpriteNode, from node: SKNode) {
@@ -41,8 +56,12 @@ struct SceneDepthSensorStructure {
     mutating func buildSensors(to parent: SKNode, numberOfSensors: Int) {
         // There should be usually 11 sensors in Noble Sword.
         for sensorNumber in 1...numberOfSensors {
-            sensors.append(Sensor(layer: sensorNumber))
+            let sensor = Sensor(layer: sensorNumber)
+            sensors.append(sensor)
+            mainNode.addChild(sensor)
         }
+        
+        parent.addChild(mainNode)
     }
     
     func sense(for intity: SKSpriteNode, from node: SKNode) {

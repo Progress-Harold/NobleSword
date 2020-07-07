@@ -32,7 +32,6 @@ class GameSceneTemplate: SKScene {
     var CM = ControlManager.shared
     let moveJoystick = js(withDiameter: 100)
     var joystickView = SKSpriteNode()
-    
     var attackButton = SKSpriteNode()
     
     // Player Stuff
@@ -62,6 +61,10 @@ class GameSceneTemplate: SKScene {
         }
     }
     
+    // MARK - SensorSystem
+    var sensorSystem: SceneDepthSensorStructure = SceneDepthSensorStructure()
+    
+    // SceneBounds
     var minX: CGFloat = -90
     var maxX: CGFloat = 135
     var minY: CGFloat = -165
@@ -77,6 +80,7 @@ class GameSceneTemplate: SKScene {
         if let node = camera?.childNode(withName: "jsNode") as? SKSpriteNode {
             joystickView = node
         }
+        
         
         setUpSections()
         animateTraps()
@@ -187,13 +191,9 @@ class GameSceneTemplate: SKScene {
         }
     }
     
-//    func setCameraPos() {
-////        guard let section = level.currentSection() else {
-////            return
-////        }
-////
-////        camera?.run(.move(to: convert((CGPoint(x: 0, y: 0)), from: section.mainNode), duration: 0.8))
-//    }
+    func buildSensorSystem(with parent: SKNode) {
+        sensorSystem.buildSensors(to: parent, numberOfSensors: 11)
+    }
     
     func masaAttack() {
         let attCollider = SKSpriteNode(color: .red, size: CGSize(width: 34.729, height: 46.733))
@@ -239,6 +239,8 @@ class GameSceneTemplate: SKScene {
         print("section\(number)")
         if let sectionNode = childNode(withName: "section\(number)") {
             var section = Section(mainNode: sectionNode, warps: [], sponPoints: [])
+            
+            buildSensorSystem(with: section.mainNode)
             
             if let trap1 = sectionNode.childNode(withName: "trap") as? SKSpriteNode {
                 self.trap = trap1
